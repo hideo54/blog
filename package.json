@@ -1,0 +1,8 @@
+{
+    "name": "blog",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/hideo54/blog.git",
+    "author": "hideo54 <hideo54@hideo54.com>",
+    "license": "Apache-2.0"
+}
