@@ -15,5 +15,12 @@ html
             ga('create', '#{googleAnalyticsTrackingId}','auto');
             ga('send', 'pageview');
     body
-        h1=title
-        p This blog is under development.
+        main
+            h1=title
+            p This blog is under development.
+            if otherSites !== null
+                hr
+                p その他のサイト:
+                ul
+                    each site in otherSites
+                        li: a(href=site.url) #{site.name}

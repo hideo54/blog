@@ -1,4 +1,14 @@
 {
     "title": "XXXX",
-    "googleAnalyticsTrackingId": "UA-XXXXXXXX-X"
+    "googleAnalyticsTrackingId": "UA-XXXXXXXX-X",
+    "otherSites": [
+        {
+            "name": "ANOTHER-SITE-1",
+            "url": "https://ANOTHER-SITE-1-URL"
+        },
+        {
+            "name": "ANOTHER-SITE-2",
+            "url": "https://ANOTHER-SITE-2-URL"
+        }
+    ] // If there's no other site, set the value as null, not as [].
 }
