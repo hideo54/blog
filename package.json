@@ -9,6 +9,6 @@
         "pug-cli": "^1.0.0-alpha6"
     },
     "scripts": {
-        "build": "pug src/*.pug -o dist/"
+        "build": "pug src/*.pug -O config.json -o dist/"
     }
 }
