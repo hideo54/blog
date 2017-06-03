@@ -6,9 +6,10 @@
     "author": "hideo54 <hideo54@hideo54.com>",
     "license": "Apache-2.0",
     "dependencies": {
+        "less": "^2.7.2",
         "pug-cli": "^1.0.0-alpha6"
     },
     "scripts": {
-        "build": "pug src/*.pug -O config.json -o dist/"
+        "build": "pug src/*.pug -O config.json -o dist/; lessc -x src/style.less > dist/style.css"
     }
 }
