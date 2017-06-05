@@ -1,6 +1,6 @@
 {
     "name": "blog",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "main": "index.js",
     "repository": "https://github.com/hideo54/blog.git",
     "author": "hideo54 <hideo54@hideo54.com>",
