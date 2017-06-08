@@ -16,11 +16,14 @@ html
             ga('send', 'pageview');
     body
         main
-            h1=title
+            h1= title
             p This blog is under development.
             if otherSites !== null
                 hr
-                p その他のサイト:
+                if otherSites.length == 1
+                    p Another site:
+                else
+                    p Other sites:
                 ul
                     each site in otherSites
                         li: a(href=site.url) #{site.name}
