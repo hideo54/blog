@@ -6,10 +6,13 @@
     "author": "hideo54 <hideo54@hideo54.com>",
     "license": "Apache-2.0",
     "dependencies": {
-        "less": "^2.7.2",
-        "pug-cli": "^1.0.0-alpha6"
+        "gulp": "^3.9.1",
+        "gulp-clean-css": "^3.4.1",
+        "gulp-less": "^3.3.0",
+        "gulp-pug": "^3.3.0"
     },
     "scripts": {
-        "build": "pug src/*.pug -O config.json -o dist/; lessc -x src/style.less > dist/style.css"
+        "build": "gulp",
+        "watch": "gulp watch"
     }
 }
