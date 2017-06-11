@@ -17,19 +17,7 @@ decided. Development of the version is proceeded on
 
 ## Planned features
 
-* **Fast**: consists of only static files.
-* **No PHP**: made only with Node.js; requires only Node.js, yarn (or npm),
-and pm2 (or something).
-* **Simple design**
-* **Using pug for markup**
-* **Syntax-highlighting support**
-* **Detailed access-analysis support**
-: by both Google Analytics and original system.
-* **Two languages support**: Japanese and English.
-* **AMP (Accelerated Mobile Pages) support**
-* **Better SEO (Search Engine Optimization) support**
-* **Useful for everyone**: common files include no preferences;
-preferences are managed as git-ignored files for much easier customization.
+See [Projects](https://github.com/hideo54/blog/projects)
 
 ## Build
 
