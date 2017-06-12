@@ -24,6 +24,7 @@ gulp.task('less', () => {
 gulp.task('watch', ['pug', 'less'], () => {
     gulp.watch('src/**/*.pug', ['pug']);
     gulp.watch('src/style.less', ['less']);
+    gulp.watch('config.json', ['pug', 'less']);
 });
 
 gulp.task('default', ['pug', 'less']);
