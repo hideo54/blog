@@ -1,6 +1,5 @@
 h1, p, li {
     font-family: -apple-system, "BlinkMacSystemFont", sans-serif;
-    text-align: center;
 }
 
 a {
@@ -8,14 +7,23 @@ a {
     color: green; // tmp
 }
 
+header {
+    h1.title, p.caption {
+        text-align: center;
+    }
+}
+
 main {
     max-width: 800px;
     margin: 0 auto;
-    hr {
-        width: 80%;
-        margin-top: 2em;
-        margin-bottom: 2em;
+    .center {
+        text-align: center;
     }
+}
+
+footer {
+    max-width: 800px;
+    margin: 0 auto;
     ul {
         padding-left: 0;
         line-height: 2em;
