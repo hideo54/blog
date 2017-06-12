@@ -1,0 +1,9 @@
+mixin date(datestr)
+    - const elapsed = Date.now() - Date.parse(datestr);
+    if elapsed > 15552000000
+        // If more than half a year... (15552000000ms = 180 days)
+        .date.caution
+            p Publication date: #{datestr}
+            p Some of the information written may be old.
+    else
+        .date: p Publication date: #{datestr}
