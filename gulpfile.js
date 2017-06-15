@@ -5,7 +5,7 @@ const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
 
 gulp.task('pug', () => {
-    return gulp.src('src/**/[^_]*.pug')
+    return gulp.src(['src/**/[^_]*.pug'])
         .pipe(plumber())
         .pipe(pug({
             locals: {

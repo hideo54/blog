@@ -1,0 +1,14 @@
+extends /_layout
+
+block head
+    title Hello!
+
+block main
+    article#_000
+        h1: a(href=`/archives/000`) Hello!
+        include /_date
+        +date('2017/06/01')
+        p Hello, World! This is the sample page for your blog.
+        p When you try to start to write a new article, copy and edit this file.
+        include /_share
+        +share('_000')
