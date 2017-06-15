@@ -8,6 +8,11 @@ h1, h2, h3, p, li, blockquote {
     word-wrap: break-word;
 }
 
+p.large {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
 code {
     font-size: 1.2em;
     white-space: pre-wrap;
@@ -83,6 +88,23 @@ footer {
     max-width: 800px;
     margin: 0 auto;
     padding: 1em;
+    img#icon {
+        width: 100px;
+        height: 100px;
+        margin-right: 1em;
+        margin-bottom: 2em;
+        border-radius: 50%;
+        float: left;
+    }
+    #profile-desc {
+        p.large {
+            margin-top: 0;
+            overflow: hidden;
+        }
+    }
+    section.sites {
+        clear: both;
+    }
     ul {
         padding-left: 0;
         line-height: 2em;

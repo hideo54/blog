@@ -2,6 +2,8 @@
     "address": "example.com",
     "title": "TITLE",
     "caption": "CAPTION",
+    "authorName": "NAME",
+    "iconImageUrl": "https://example.com/foo.png",
     "profile": "PROFILE MESSAGE",
     "googleAnalyticsTrackingId": "UA-XXXXXXXX-X",
     "otherSites": [

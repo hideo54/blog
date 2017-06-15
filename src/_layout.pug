@@ -21,7 +21,10 @@ html(lang='ja')
         footer
             section.profile
                 h1 Profile
-                p= config.profile
+                img#icon(src=config.iconImageUrl)
+                #profile-desc
+                    p.large= config.authorName
+                    p= config.profile
             section.sites
                 if config.otherSites !== null
                     if config.otherSites.length == 1
