@@ -1,6 +1,8 @@
 @tint: #3498db; // tmp
 @caution: #e74c3c;
 
+@asbestos: #7f8c8d;
+
 h1, h2, h3, p, li, blockquote {
     font-family: -apple-system, "BlinkMacSystemFont", sans-serif;
     word-wrap: break-word;
@@ -13,6 +15,26 @@ code {
 a {
     text-decoration: none;
     color: @tint;
+}
+
+blockquote {
+    position: relative;
+    margin-right: 0;
+    padding: 0.5em 0 0.5em 2em;
+    box-sizing: border-box;
+    font-style: italic;
+    color: @asbestos;
+    border-left: 3px solid @tint;
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        vertical-align: middle;
+        content: "“";
+        font-family: sans-serif;
+        color: @tint;
+        font-size: 3em;
+    }
 }
 
 header {
