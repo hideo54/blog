@@ -1,4 +1,5 @@
-mixin share(dir, given_id)
+mixin share(given_id)
+    - const dir = 'archives'
     - let id = given_id;
     - if (String(given_id).substr(0, 1) === '_') { id = String(given_id).substr(1) };
     .share(id=given_id)
