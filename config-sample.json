@@ -5,6 +5,7 @@
     "authorName": "NAME",
     "iconImageUrl": "https://example.com/foo.png",
     "profile": "PROFILE MESSAGE",
+    "twitter": "XXXXXXX",
     "googleAnalyticsTrackingId": "UA-XXXXXXXX-X",
     "otherSites": [
         {
