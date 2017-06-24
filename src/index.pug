@@ -10,5 +10,7 @@ block main
             h2 Recent articles
             ul
                 each article in recent
-                    li: a(href=`/archives/${article.number}`)= article.title
+                    li: p
+                        a(href=`/archives/${article.number}`)= article.title
+                        span.date (#{article.date})
         

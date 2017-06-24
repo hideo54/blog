@@ -20,8 +20,9 @@ const getRecentPosts = num => {
             const dom = cheerio.load(html);
             const title = dom('title').text();
             const pageNum = filename.slice(0, filename.length - 4);
+            const date = dom('span.date').text();
 
-            recent.push({ number: pageNum, title: title });
+            recent.push({ number: pageNum, title: title, date: date });
         }
         resolve(recent);
     });
