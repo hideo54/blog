@@ -6,6 +6,7 @@ const cleanCSS = require('gulp-clean-css');
 const fs = require('fs');
 const pug = require('pug');
 const cheerio = require('cheerio');
+const config = require('./config.json')
 
 const getRecentPosts = num => {
     return new Promise((resolve, reject) => {
@@ -13,7 +14,7 @@ const getRecentPosts = num => {
         let recent = [];
         for (filename of files) {
             const html = pug.renderFile(`src/archives/${filename}`, {
-                config: require('./config.json'),
+                config: config,
                 basedir: 'src/'
             });
             const dom = cheerio.load(html);
@@ -27,12 +28,12 @@ const getRecentPosts = num => {
 };
 
 gulp.task('pug', () => {
-    getRecentPosts(5).then((recent) => {
+    getRecentPosts(config.numberOfRecent).then((recent) => {
         return gulp.src(['src/**/[^_]*.pug'])
             .pipe(plumber())
             .pipe(gulpPug({
                 locals: {
-                    config: require('./config.json'),
+                    config: config,
                     recent: recent
                 },
                 basedir: 'src/'

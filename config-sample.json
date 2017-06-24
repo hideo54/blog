@@ -2,6 +2,7 @@
     "address": "example.com",
     "title": "TITLE",
     "caption": "CAPTION",
+    "numberOfRecent": 5,
     "authorName": "NAME",
     "iconImageUrl": "https://example.com/foo.png",
     "profile": "PROFILE MESSAGE",
