@@ -5,4 +5,8 @@ block head
     meta(name='description' content="hideo54's Blog.")
 
 block main
-    p.center This blog is under development.
+    h2 Recent articles
+    ul.articles
+        each article in recent
+            li: a(href=`/archives/${article.number}`)= article.title
+        
