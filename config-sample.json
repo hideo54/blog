@@ -8,6 +8,7 @@
     "profile": "PROFILE MESSAGE",
     "twitter": "XXXXXXX",
     "googleAnalyticsTrackingId": "UA-XXXXXXXX-X",
+    "googleAnalyticsViewId": "ga:XXXXXXXXX",
     "otherSites": [
         {
             "name": "ANOTHER-SITE-1",

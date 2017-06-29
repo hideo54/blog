@@ -13,4 +13,12 @@ block main
                     li: p
                         a(href=`/archives/${article.number}`)= article.title
                         span.date (#{article.date})
+    section.popular
+        if popular.length !== 0
+            h2 Popular articles
+            ul
+                each article in popular
+                    li: p
+                        a(href=`/archives/${article.number}`)= article.title
+                        span.date (#{article.date})
         
