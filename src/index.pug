@@ -1,26 +1,24 @@
-doctype
-html
-    head
-        title= title
-        meta(charset='utf-8')
-        meta(name='viewport',
-            content='width=device-width,initial-scale=1,maximum-scale=1')
-        link(rel='stylesheet' type='text/css' href='style.css')
-        script.
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||
-            function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
-            a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;
-            a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script',
-            'https://www.google-analytics.com/analytics.js','ga');
-            ga('create', '#{googleAnalyticsTrackingId}','auto');
-            ga('send', 'pageview');
-    body
-        main
-            h1=title
-            p This blog is under development.
-            if otherSites !== null
-                hr
-                p その他のサイト:
-                ul
-                    each site in otherSites
-                        li: a(href=site.url) #{site.name}
+extends /_layout
+
+block head
+    title= config.title
+    meta(name='description' content="hideo54's Blog.")
+
+block main
+    section.recent
+        if recent.length !== 0
+            h2 Recent articles
+            ul
+                each article in recent
+                    li: p
+                        a(href=`/archives/${article.number}`)= article.title
+                        span.date (#{article.date})
+    section.popular
+        if popular.length !== 0
+            h2 Popular articles
+            ul
+                each article in popular
+                    li: p
+                        a(href=`/archives/${article.number}`)= article.title
+                        span.date (#{article.date})
+        

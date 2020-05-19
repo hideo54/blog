@@ -1,0 +1,42 @@
+doctype
+html(lang='ja')
+    head
+        block head
+        meta(charset='utf-8')
+        meta(name='viewport',
+            content='width=device-width,initial-scale=1,maximum-scale=1')
+        meta(name='description' content=`${config.title}; ${config.caption}`)
+        link(rel='stylesheet' type='text/css' href='/style.css')
+        if config.googleAnalyticsTrackingId !== null
+            script (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '#{config.googleAnalyticsTrackingId}','auto');ga('send', 'pageview');
+        // For highlight.js
+        link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js')
+        script hljs.initHighlightingOnLoad();
+        // For Twitter
+        script(async src='https://platform.twitter.com/widgets.js' charset='utf-8')
+    body
+        header
+            h1.title: a(href='/')= config.title
+            p.caption= config.caption
+        main
+            block main
+        hr
+        footer
+            section.profile
+                h1 Profile
+                img#icon(src=config.iconImageUrl)
+                #profile-desc
+                    p.large= config.authorName
+                    p= config.profile
+            section.twitter
+                a(class='twitter-timeline' href=`https://twitter.com/${config.twitter}` data-tweet-limit='5') Tweets by #{config.twitter}
+            section.sites
+                if config.otherSites !== null
+                    if config.otherSites.length == 1
+                        h1 Another site
+                    else
+                        h1 Other sites
+                    ul
+                        each site in config.otherSites
+                            li: a(href=site.url target='_blank') #{site.name}

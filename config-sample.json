@@ -1,6 +1,14 @@
 {
-    "title": "XXXX",
+    "address": "example.com",
+    "title": "TITLE",
+    "caption": "CAPTION",
+    "numberOfRecent": 5,
+    "authorName": "NAME",
+    "iconImageUrl": "https://example.com/foo.png",
+    "profile": "PROFILE MESSAGE",
+    "twitter": "XXXXXXX",
     "googleAnalyticsTrackingId": "UA-XXXXXXXX-X",
+    "googleAnalyticsViewId": "ga:XXXXXXXXX",
     "otherSites": [
         {
             "name": "ANOTHER-SITE-1",
@@ -10,5 +18,5 @@
             "name": "ANOTHER-SITE-2",
             "url": "https://ANOTHER-SITE-2-URL"
         }
-    ] // If there's no other site, set the value as null, not as [].
+    ]
 }
