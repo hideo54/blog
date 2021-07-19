@@ -10,6 +10,7 @@ const LogoTypeDiv = styled.div`
         margin-bottom: 0;
         font-size: 3em;
         font-weight: 700;
+        text-shadow: 0 0 5px #CCCCCC;
     }
 
     p {
