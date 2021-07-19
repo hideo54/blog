@@ -1,6 +1,10 @@
+import Layout from '../components/Layout';
+
 const App = () => {
     return (
-        <p>Hello, world!</p>
+        <Layout>
+            <p>Hello, world!</p>
+        </Layout>
     );
 };
 
