@@ -1,22 +1,31 @@
 {
-    "name": "blog",
-    "version": "0.1.0",
-    "main": "index.js",
-    "repository": "https://github.com/hideo54/blog.git",
-    "author": "hideo54 <hideo54@hideo54.com>",
-    "license": "Apache-2.0",
-    "dependencies": {
-        "cheerio": "^1.0.0-rc.1",
-        "googleapis": "^19.0.0",
-        "gulp": "^3.9.1",
-        "gulp-clean-css": "^3.4.1",
-        "gulp-less": "^3.3.0",
-        "gulp-plumber": "^1.1.0",
-        "gulp-pug": "^3.3.0",
-        "pug": "^2.0.0-rc.2"
-    },
-    "scripts": {
-        "build": "gulp",
-        "watch": "gulp watch"
-    }
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Blog system for hideo54. Now in development.",
+  "main": "index.js",
+  "scripts": {
+    "develop": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hideo54/blog.git"
+  },
+  "author": "hideo54",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hideo54/blog/issues"
+  },
+  "homepage": "https://github.com/hideo54/blog#readme",
+  "dependencies": {
+    "next": "^11.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.14",
+    "typescript": "^4.3.5"
+  }
 }
