@@ -28,7 +28,7 @@ const stringifyDate = (date: Date) => {
 };
 
 export const getStaticProps = async () => {
-    const archivesDir = './pages/archives/';
+    const archivesDir = './archives/';
     const archiveFilenames = await fs.readdir(archivesDir);
     const archivesData = await Promise.all(
         archiveFilenames.map(filename =>
