@@ -1,9 +1,11 @@
 import { InferGetStaticPropsType } from 'next';
+import { serialize } from 'next-mdx-remote/serialize';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
 import dayjs from 'dayjs';
 import Layout from '../components/Layout';
 import { Archive } from '../components/atoms';
+import { MDXProvider } from '../components/markdown';
 
 interface ArchiveData {
     title: string;
@@ -40,12 +42,12 @@ export const getStaticProps = async () => {
                     date: stringifyDate(data.date),
                     update: data.update ? stringifyDate(data.update) : null,
                 };
-                return {
-                    data: serializableData,
-                    excerpt: file.excerpt.trim(),
-                    filename: filename.split('.')[0],
-                };
-            })
+                const excerptSourcePromise = serialize(file.excerpt);
+                return Promise.all([ serializableData, excerptSourcePromise ]);
+            }).then(([ data, excerptSource ]) => ({
+                data, excerptSource,
+                filename: filename.split('.')[0],
+            }))
         )
     );
     return {
@@ -66,7 +68,7 @@ const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) =
                     category={archive.data.category}
                     isExcerpt={true}
                 >
-                    {archive.excerpt}
+                    <MDXProvider mdxSource={archive.excerptSource} />
                 </Archive>
             ))}
         </Layout>
