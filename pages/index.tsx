@@ -2,30 +2,10 @@ import { InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
-import dayjs from 'dayjs';
 import Layout from '../components/Layout';
 import { Archive } from '../components/atoms';
 import { MDXProvider } from '../components/markdown';
-
-interface ArchiveData {
-    title: string;
-    date: Date;
-    update?: Date;
-    category: string;
-    tags: string[];
-}
-
-interface SerializableArchiveData extends Omit<ArchiveData, 'date' | 'update'> {
-    date: string;
-    update: string | null;
-}
-
-const stringifyDate = (date: Date) => {
-    const d = dayjs(date);
-    const now = dayjs();
-    const format = d.year === now.year ? 'M月D日' : 'YYYY年M月D日';
-    return d.format(format);
-};
+import { stringifyDate } from '../lib/utils';
 
 export const getStaticProps = async () => {
     const archivesDir = './archives/';
