@@ -1,4 +1,4 @@
-import { InferGetStaticPropsType } from 'next';
+import type { InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
@@ -47,6 +47,7 @@ const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) =
                     filename={archive.filename}
                     category={archive.data.category}
                     isExcerpt={true}
+                    showFrame={true}
                 >
                     <MDXProvider mdxSource={archive.excerptSource} />
                 </Archive>

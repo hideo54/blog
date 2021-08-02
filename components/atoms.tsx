@@ -36,11 +36,13 @@ export const IconLink: React.FC<{
     );
 };
 
-const ArchiveArticle = styled.article`
+const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
     margin: 2em 0;
     padding: 1em;
     border-radius: 20px;
-    box-shadow: 0 0 10px #CCCCCC;
+    ${props => props.showFrame ? `
+        box-shadow: 0 0 10px #CCCCCC;
+    ` : ''}
 
     h2 {
         margin-top: 0.5em;
@@ -57,8 +59,9 @@ export const Archive: React.FC<{
     filename: string;
     category: string;
     isExcerpt?: boolean;
-}> = ({ children, title, filename, category, isExcerpt = false }) => (
-    <ArchiveArticle>
+    showFrame?: boolean;
+}> = ({ children, title, filename, category, isExcerpt = false, showFrame = false }) => (
+    <ArchiveArticle showFrame={showFrame}>
         <IconLink href={'/category/' + category} LeftIcon={Folder}>{category}</IconLink>
         <h2>
             <Link href={'/archives/' + filename}>
