@@ -34,6 +34,14 @@ const GlobalStyle = createGlobalStyle`
         color: #333333;
     }
 
+    p {
+        line-height: 1.6;
+    }
+
+    strong {
+        font-weight: 800;
+    }
+
     span {
         color: #333333;
         line-height: 100%;
@@ -42,6 +50,11 @@ const GlobalStyle = createGlobalStyle`
     a {
         color: #0091ea;
         text-decoration: none;
+    }
+
+    li {
+        margin: 0.5em 0;
+        line-height: 1.6;
     }
 `;
 
