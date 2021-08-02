@@ -5,7 +5,6 @@ import matter from 'gray-matter';
 import Layout from '../../components/Layout';
 import { Archive } from '../../components/atoms';
 import { MDXProvider } from '../../components/markdown';
-import { stringifyDate } from '../../lib/utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const archivesDir = './archives/';
@@ -28,8 +27,8 @@ export const getStaticProps = async context => {
     const data = file.data as ArchiveData;
     const serializableData: SerializableArchiveData = {
         ...data,
-        date: stringifyDate(data.date),
-        update: data.update ? stringifyDate(data.update) : null,
+        date: data.date.toISOString(),
+        update: data.update ? data.update.toISOString() : null,
     };
     const bodySource = await serialize(file.content);
     return {
@@ -47,8 +46,11 @@ const App = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
             <Archive
                 key={props.filename}
                 title={props.data.title}
+                date={props.data.date}
+                update={props.data.update}
                 filename={props.filename}
                 category={props.data.category}
+                tags={props.data.tags}
             >
                 <MDXProvider mdxSource={props.bodySource} />
             </Archive>

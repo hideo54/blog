@@ -26,6 +26,7 @@ const Pre = styled.pre`
 
 const components = {
     a: props => <IconLink RightIcon={Open} href={props.href}>{props.children}</IconLink>,
+    h1: props => <H2>{props.children}</H2>, // h1 も h2 にする
     h2: props => <H2>{props.children}</H2>,
     inlineCode: props => <Code>{props.children}</Code>,
     pre: props => <Pre>{props.children}</Pre>,

@@ -2,6 +2,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import type { StyledIcon } from '@styled-icons/styled-icon';
 import { Folder } from '@styled-icons/ionicons-outline';
+import dayjs, { Dayjs } from 'dayjs';
+import { stringifyDate } from '../lib/utils';
 
 export const IconLink: React.FC<{
     LeftIcon?: StyledIcon;
@@ -54,13 +56,29 @@ const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
     }
 `;
 
+const CautionP = styled.p`
+    color: #DA0808;
+`;
+
+const TagSpan = styled.span`
+    display: inline-block;
+    background: #EEEEEE;
+    margin: 4px 0;
+    margin-right: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+`;
+
 export const Archive: React.FC<{
     title: string;
+    date: string | Dayjs;
+    update: string | Dayjs;
     filename: string;
     category: string;
+    tags: string[];
     isExcerpt?: boolean;
     showFrame?: boolean;
-}> = ({ children, title, filename, category, isExcerpt = false, showFrame = false }) => (
+}> = ({ children, title, date, update, filename, category, tags, isExcerpt = false, showFrame = false }) => (
     <ArchiveArticle showFrame={showFrame}>
         <IconLink href={'/category/' + category} LeftIcon={Folder}>{category}</IconLink>
         <h2 className='title'>
@@ -70,6 +88,17 @@ export const Archive: React.FC<{
                 </a>
             </Link>
         </h2>
+        <section>
+            <p>{stringifyDate(date)}{update !== date && ` (最終更新: ${stringifyDate(update)})`}</p>
+            {dayjs() > dayjs(update).add(6, 'months') && (
+                <CautionP>
+                    この記事は最終更新から半年以上経過しており、内容が古い可能性があります。
+                </CautionP>
+            )}
+        </section>
+        <section>
+            {tags.map(tag => <TagSpan key={tag}>{tag}</TagSpan>)}
+        </section>
         <section>
             {children}
         </section>

@@ -1,11 +1,11 @@
 import type { InferGetStaticPropsType } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
+import dayjs from 'dayjs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
 import Layout from '../components/Layout';
 import { Archive } from '../components/atoms';
 import { MDXProvider } from '../components/markdown';
-import { stringifyDate } from '../lib/utils';
 
 export const getStaticProps = async () => {
     const archivesDir = './archives/';
@@ -19,8 +19,8 @@ export const getStaticProps = async () => {
                 const data = file.data as ArchiveData;
                 const serializableData: SerializableArchiveData = {
                     ...data,
-                    date: stringifyDate(data.date),
-                    update: data.update ? stringifyDate(data.update) : null,
+                    date: data.date.toISOString(),
+                    update: data.update ? data.update?.toISOString() : null,
                 };
                 const excerptSourcePromise = serialize(file.excerpt);
                 return Promise.all([ serializableData, excerptSourcePromise ]);
@@ -38,14 +38,18 @@ export const getStaticProps = async () => {
 };
 
 const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) => {
+    archivesData.sort((a, b) => dayjs(a.data.date) > dayjs(b.data.date) ? -1 : 1)
     return (
         <Layout>
             {archivesData.map(archive => (
                 <Archive
                     key={archive.filename}
                     title={archive.data.title}
+                    date={archive.data.date}
+                    update={archive.data.update}
                     filename={archive.filename}
                     category={archive.data.category}
+                    tags={archive.data.tags}
                     isExcerpt={true}
                     showFrame={true}
                 >
