@@ -38,13 +38,13 @@ export const IconLink: React.FC<{
 
 const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
     margin: 2em 0;
-    padding: 1em;
-    border-radius: 20px;
     ${props => props.showFrame ? `
+        padding: 1em;
+        border-radius: 20px;
         box-shadow: 0 0 10px #CCCCCC;
     ` : ''}
 
-    h2 {
+    h2.title {
         margin-top: 0.5em;
         font-feature-settings: 'palt'; // Proportional Alternate Widths. cf. https://helpx.adobe.com/jp/fonts/user-guide.html/jp/fonts/using/open-type-syntax.ug.html#palt
     }
@@ -63,7 +63,7 @@ export const Archive: React.FC<{
 }> = ({ children, title, filename, category, isExcerpt = false, showFrame = false }) => (
     <ArchiveArticle showFrame={showFrame}>
         <IconLink href={'/category/' + category} LeftIcon={Folder}>{category}</IconLink>
-        <h2>
+        <h2 className='title'>
             <Link href={'/archives/' + filename}>
                 <a>
                     {title}
