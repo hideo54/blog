@@ -39,7 +39,6 @@ export const IconLink: React.FC<{
 const ArchiveArticle = styled.article`
     margin: 2em 0;
     padding: 1em;
-    border: solid 1px #CCCCCC;
     border-radius: 20px;
     box-shadow: 0 0 10px #CCCCCC;
 
