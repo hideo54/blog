@@ -1,0 +1,3 @@
+[submodule "archives"]
+	path = archives
+	url = git@github.com:hideo54/blog-archives.git
