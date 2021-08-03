@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import type { StyledIcon } from '@styled-icons/styled-icon';
 import { Folder } from '@styled-icons/ionicons-outline';
 import dayjs, { Dayjs } from 'dayjs';
+import qs from 'querystring';
 import { stringifyDate } from '../lib/utils';
 
 export const IconLink: React.FC<{
@@ -69,6 +70,38 @@ const TagSpan = styled.span`
     border-radius: 4px;
 `;
 
+const ShareButtonSpan = styled.span`
+    margin-right: 8px;
+`;
+
+const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => (
+    // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
+    <ShareButtonSpan>
+        <a className='twitter-share-button' href={'https://twitter.com/intent/tweet?' + qs.stringify({ text, url })}>Tweet</a>
+    </ShareButtonSpan>
+);
+
+const HatenaBookmarkButton: React.FC<{ path: string; }> = ({ path }) => (
+    // https://b.hatena.ne.jp/guide/bbutton
+    <ShareButtonSpan>
+        <a
+            href={`https://b.hatena.ne.jp/entry/s/blog.hideo54.com${path}`}
+            className='hatena-bookmark-button'
+            data-hatena-bookmark-layout='basic-label-counter'
+            data-hatena-bookmark-lang='ja'
+            title='このエントリーをはてなブックマークに追加'
+        >
+            <img
+                src='https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png'
+                alt='このエントリーをはてなブックマークに追加'
+                width='20'
+                height='20'
+                style={{ border: 'none' }}
+            />
+        </a>
+    </ShareButtonSpan>
+);
+
 export const Archive: React.FC<{
     title: string;
     date: string | Dayjs;
@@ -78,34 +111,49 @@ export const Archive: React.FC<{
     tags: string[];
     isExcerpt?: boolean;
     showFrame?: boolean;
-}> = ({ children, title, date, update, filename, category, tags, isExcerpt = false, showFrame = false }) => (
-    <ArchiveArticle showFrame={showFrame}>
-        <IconLink href={'/category/' + category} LeftIcon={Folder}>{category}</IconLink>
-        <h2 className='title'>
-            <Link href={'/archives/' + filename}>
-                <a>
-                    {title}
-                </a>
-            </Link>
-        </h2>
-        <section>
-            <p>{stringifyDate(date)}{update !== date && ` (最終更新: ${stringifyDate(update)})`}</p>
-            {dayjs() > dayjs(update).add(6, 'months') && (
-                <CautionP>
-                    この記事は最終更新から半年以上経過しており、内容が古い可能性があります。
-                </CautionP>
+}> = ({ children, title, date, update, filename, category, tags, isExcerpt = false, showFrame = false }) => {
+    const Share = () => (
+        <div>
+            <TweetButton text={`${title} | いうていけろ - hideo54のブログ`} url={`https://blog.hideo54.com/archives/${filename}`} />
+            <HatenaBookmarkButton path={`/archives/${filename}`} />
+        </div>
+    );
+    return (
+        <ArchiveArticle showFrame={showFrame}>
+            <IconLink href={'/category/' + category} LeftIcon={Folder}>{category}</IconLink>
+            <h2 className='title'>
+                <Link href={'/archives/' + filename}>
+                    <a>
+                        {title}
+                    </a>
+                </Link>
+            </h2>
+            <section>
+                <p>{stringifyDate(date)}{update !== date && ` (最終更新: ${stringifyDate(update)})`}</p>
+                {dayjs() > dayjs(update).add(6, 'months') && (
+                    <CautionP>
+                        この記事は最終更新から半年以上経過しており、内容が古い可能性があります。
+                    </CautionP>
+                )}
+            </section>
+            <section>
+                {tags.map(tag => <TagSpan key={tag}>{tag}</TagSpan>)}
+            </section>
+            <Share />
+            <hr color='#0091EA' />
+            <section>
+                {children}
+            </section>
+            {isExcerpt ? (
+                <Link href={'/archives/' + filename}>
+                    <a>続きを読む</a>
+                </Link>
+            ) : (
+                <>
+                    <hr color='#0091EA' />
+                    <Share />
+                </>
             )}
-        </section>
-        <section>
-            {tags.map(tag => <TagSpan key={tag}>{tag}</TagSpan>)}
-        </section>
-        <section>
-            {children}
-        </section>
-        {isExcerpt && (
-            <Link href={'/archives/' + filename}>
-                <a>続きを読む</a>
-            </Link>
-        )}
-    </ArchiveArticle>
-);
+        </ArchiveArticle>
+    );
+};

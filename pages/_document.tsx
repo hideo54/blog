@@ -41,20 +41,37 @@ export default class MyDocument extends Document {
                     <link rel='preconnect' href='https://fonts.googleapis.com' />
                     <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='' />
                     <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;700&display=swap' rel='stylesheet' />
+                    <script dangerouslySetInnerHTML={{
+                        __html: minify(`
+                            window.twttr = (function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0],
+                                    t = window.twttr || {};
+                                if (d.getElementById(id)) return t;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = "https://platform.twitter.com/widgets.js";
+                                fjs.parentNode.insertBefore(js, fjs);
+                                t._e = [];
+                                t.ready = function(f) {
+                                t._e.push(f);
+                                };
+                                return t;
+                            }(document, "script", "twitter-wjs"));
+                        `),
+                    }} />
+                    <script async src='https://b.st-hatena.com/js/bookmark_button.js' />
                     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: minify(`
-                                if (window.location.hostname === "hideo54-lab.web.app" || window.location.hostname === 'hideo54-lab.firebaseapp.com') {
-                                    window.location.href = 'https://lab.hideo54.com';
-                                }
-                                window.dataLayer = window.dataLayer || [];
-                                function gtag(){dataLayer.push(arguments);}
-                                gtag('js', new Date());
-                                gtag('config', '${GA_TRACKING_ID}');
-                            `),
-                        }}
-                        // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
+                    <script dangerouslySetInnerHTML={{
+                        __html: minify(`
+                            if (window.location.hostname === "hideo54-lab.web.app" || window.location.hostname === 'hideo54-lab.firebaseapp.com') {
+                                window.location.href = 'https://lab.hideo54.com';
+                            }
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', '${GA_TRACKING_ID}');
+                        `),
+                    }} // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js
                     />
                 </Head>
                 <body>
