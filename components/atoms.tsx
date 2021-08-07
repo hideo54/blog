@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import type { StyledIcon } from '@styled-icons/styled-icon';
-import { Folder } from '@styled-icons/ionicons-outline';
+import { Folder, Calendar } from '@styled-icons/ionicons-outline';
 import dayjs, { Dayjs } from 'dayjs';
 import qs from 'querystring';
-import { stringifyDate } from '../lib/utils';
 
 export const IconLink: React.FC<{
     LeftIcon?: StyledIcon;
@@ -107,31 +106,43 @@ const HatenaBookmarkButton: React.FC<{ path: string; }> = ({ path }) => (
 export const Archive: React.FC<{
     title: string;
     date: string | Dayjs;
-    update: string | Dayjs;
+    update?: string | Dayjs;
     filename: string;
     category: string;
     tags: string[];
     isExcerpt?: boolean;
     showFrame?: boolean;
-}> = ({ children, title, date, update, filename, category, tags, isExcerpt = false, showFrame = false }) => {
+}> = props => {
+    const update = props.update || props.date;
+    const isExcerpt = props.isExcerpt || false;
+    const showFrame = props.showFrame || false;
     const Share = () => (
         <div>
-            <TweetButton text={`${title} | いうていけろ - hideo54のブログ`} url={`https://blog.hideo54.com/archives/${filename}`} />
-            <HatenaBookmarkButton path={`/archives/${filename}`} />
+            <TweetButton
+                text={`${props.title} | いうていけろ - hideo54のブログ`}
+                url={`https://blog.hideo54.com/archives/${props.filename}`}
+            />
+            <HatenaBookmarkButton path={`/archives/${props.filename}`} />
         </div>
     );
     return (
         <ArchiveArticle showFrame={showFrame}>
-            <IconLink href={'/category/' + category} LeftIcon={Folder}>{category}</IconLink>
+            <IconLink href={'/category/' + props.category} LeftIcon={Folder}>{props.category}</IconLink>
             <h2 className='title'>
-                <Link href={'/archives/' + filename}>
+                <Link href={'/archives/' + props.filename}>
                     <a>
-                        {title}
+                        {props.title}
                     </a>
                 </Link>
             </h2>
             <section>
-                <p>{stringifyDate(date)}{update !== date && ` (最終更新: ${stringifyDate(update)})`}</p>
+                <IconLink href={'/archives?month=' + dayjs(props.date).format('YYYY-MM')} LeftIcon={Calendar}>
+                    {dayjs(props.date).format('YYYY年M月')}
+                </IconLink>
+                <span>
+                    {dayjs(props.date).format('D日')}
+                    {update !== props.date && ` (最終更新: ${dayjs(update).format('YYYY年M月D日')})`}
+                </span>
                 {dayjs() > dayjs(update).add(6, 'months') && (
                     <CautionP>
                         この記事は最終更新から半年以上経過しており、内容が古い可能性があります。
@@ -139,15 +150,15 @@ export const Archive: React.FC<{
                 )}
             </section>
             <section>
-                {tags.map(tag => <TagSpan key={tag}>{tag}</TagSpan>)}
+                {props.tags.map(tag => <TagSpan key={tag}>{tag}</TagSpan>)}
             </section>
             <Share />
             <hr color='#0091EA' />
             <section>
-                {children}
+                {props.children}
             </section>
             {isExcerpt ? (
-                <Link href={'/archives/' + filename}>
+                <Link href={'/archives/' + props.filename}>
                     <a>続きを読む</a>
                 </Link>
             ) : (
