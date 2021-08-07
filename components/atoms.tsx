@@ -40,12 +40,14 @@ export const IconLink: React.FC<{
 };
 
 const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
-    margin: 2em 0;
     ${props => props.showFrame ? `
+        margin: 2em 0;
         padding: 1em;
         border-radius: 20px;
         box-shadow: 0 0 10px #CCCCCC;
-    ` : ''}
+    ` : `
+        margin: 1em 0;
+    `}
 
     h2.title {
         margin-top: 0.5em;

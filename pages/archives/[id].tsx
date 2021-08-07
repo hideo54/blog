@@ -1,9 +1,10 @@
 import type { InferGetStaticPropsType, GetStaticPaths } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
+import { ChevronBack } from '@styled-icons/ionicons-outline';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
 import Layout from '../../components/Layout';
-import { Archive } from '../../components/atoms';
+import { Archive, IconLink } from '../../components/atoms';
 import { MDXProvider } from '../../components/markdown';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -43,6 +44,7 @@ export const getStaticProps = async context => {
 const App = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <Layout title={`${props.data.title} | いうていけろ - hideo54のブログ`}>
+            <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
             <Archive
                 key={props.filename}
                 title={props.data.title}
