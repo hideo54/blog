@@ -11,7 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const archivesDir = './archives/';
     const archiveFilenames = await fs.readdir(archivesDir);
     return {
-        paths: archiveFilenames.map(filename => ({
+        paths: archiveFilenames.filter(filename => filename.endsWith('.mdx')).map(filename => ({
             params: {
                 id: filename.split('.')[0],
             },
