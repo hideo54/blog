@@ -50,6 +50,7 @@ const GlobalStyle = createGlobalStyle`
     a {
         color: #0091ea;
         text-decoration: none;
+        overflow-wrap: anywhere;
     }
 
     li {

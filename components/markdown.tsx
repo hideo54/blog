@@ -35,6 +35,15 @@ const Img = styled.img`
     max-width: 100%;
 `;
 
+const Blockquote = styled.blockquote`
+    border-left: 4px solid #CCCCCC;
+    padding-left: 1em;
+
+    p {
+        color: #888888;
+    }
+`;
+
 const TweetDiv = styled.div`
     div.twitter-tweet-rendered {
         margin: 1em auto;
@@ -59,14 +68,15 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
 };
 
 const components = {
-    a: props => <IconLink RightIcon={Open} href={props.href}>{props.children}</IconLink>,
-    h1: props => <H2>{props.children}</H2>, // h1 も h2 にする
-    h2: props => <H2>{props.children}</H2>,
-    inlineCode: props => <Code>{props.children}</Code>,
-    pre: props => <Pre>{props.children}</Pre>,
+    a: props => <IconLink RightIcon={Open} {...props} />,
+    h1: props => <H2 {...props} />, // h1 も h2 にする
+    h2: props => <H2 {...props} />,
+    inlineCode: props => <Code {...props} />,
+    pre: props => <Pre {...props} />,
     hr: () => <Hr />,
+    blockquote: props => <Blockquote {...props} />,
     img: props => <Img {...props} />,
-    Tweet: props => <Tweet {...props} />
+    Tweet: props => <Tweet {...props} />,
 };
 
 export const MDXProvider: React.FC<{ mdxSource: MDXRemoteSerializeResult; }> = ({ mdxSource }) => (
