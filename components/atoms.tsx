@@ -10,30 +10,30 @@ export const IconLink: React.FC<{
     RightIcon?: StyledIcon;
     href: string;
 }> = ({ children, LeftIcon, RightIcon, href }) => {
-    const Left = LeftIcon && styled(LeftIcon)`
-        vertical-align: text-bottom;
-        margin-right: 0.2em;
-    `;
-    const Right = RightIcon && styled(RightIcon)`
-        vertical-align: text-bottom;
-        margin-left: 0.2em;
-    `;
+    const left = LeftIcon && <LeftIcon size={'1.2em'} style={{
+        verticalAlign: 'text-bottom',
+        marginRight: '0.2em',
+    }} />;
+    const right = RightIcon && <RightIcon size={'1.2em'} style={{
+        verticalAlign: 'text-bottom',
+        marginLeft: '0.2em',
+    }} />;
     if (href.startsWith('/')) {
         return (
             <Link href={href}>
                 <a>
-                    {LeftIcon && <Left size={'1.2em'} />}
+                    {left}
                     {children}
-                    {RightIcon && <Right size={'1.2em'} />}
+                    {right}
                 </a>
             </Link>
         );
     }
     return (
         <a href={href} target='_blank'>
-            {LeftIcon && <Left size={'1.2em'} />}
+            {left}
             {children}
-            {RightIcon && <Right size={'1.2em'} />}
+            {right}
         </a>
     );
 };
@@ -127,7 +127,9 @@ export const Archive: React.FC<{
     );
     return (
         <ArchiveArticle showFrame={showFrame}>
-            <IconLink href={'/category/' + props.category} LeftIcon={Folder}>{props.category}</IconLink>
+            <b>
+                <IconLink href={'/category/' + props.category} LeftIcon={Folder}>{props.category}</IconLink>
+            </b>
             <h2 className='title'>
                 <Link href={'/archives/' + props.filename}>
                     <a>
