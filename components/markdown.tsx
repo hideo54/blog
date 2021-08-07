@@ -1,7 +1,7 @@
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import styled from 'styled-components';
 import { Open } from '@styled-icons/ionicons-outline';
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { IconLink } from './atoms';
 
 const H2 = styled.h2`

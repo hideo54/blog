@@ -11,10 +11,11 @@ export const getStaticProps = async () => {
     const archivesDir = './archives/';
     const archiveFilenames = await fs.readdir(archivesDir);
     const archivesData = await Promise.all(
-        archiveFilenames.map(filename =>
+        archiveFilenames.filter(filename => filename.endsWith('.mdx')).map(filename =>
             fs.readFile(archivesDir + filename, 'utf-8').then(d => {
                 const file = matter(d, {
                     excerpt: true,
+                    excerpt_separator: '<!-- more -->',
                 });
                 const data = file.data as ArchiveData;
                 const serializableData: SerializableArchiveData = {
