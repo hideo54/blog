@@ -68,14 +68,15 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
 };
 
 const components = {
-    a: props => <IconLink RightIcon={Open} {...props} />,
     h1: props => <H2 {...props} />, // h1 も h2 にする
     h2: props => <H2 {...props} />,
+    blockquote: props => <Blockquote {...props} />,
     inlineCode: props => <Code {...props} />,
     pre: props => <Pre {...props} />,
     hr: () => <Hr />,
-    blockquote: props => <Blockquote {...props} />,
+    a: props => <IconLink RightIcon={Open} {...props} />,
     img: props => <Img {...props} />,
+    // https://mdxjs.com/table-of-components
     Tweet: props => <Tweet {...props} />,
 };
 
