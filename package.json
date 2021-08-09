@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "1.0.0",
+  "version": "5.0.0",
   "description": "Blog system for hideo54. Now in development.",
   "main": "index.js",
   "scripts": {
