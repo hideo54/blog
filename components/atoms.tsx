@@ -180,3 +180,60 @@ export const Archive: React.FC<{
         </ArchiveArticle>
     );
 };
+
+const PageLinksDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    div {
+        width: 40px;
+        height: 40px;
+        margin: 0.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+        &.abbr {
+            cursor: default;
+        }
+        &:not(.abbr) {
+            &.current {
+                border: 2px solid #0091EA;
+                color: white;
+                background-color: #0091EA;
+                cursor: default;
+            }
+            &:not(.current) {
+                border: 2px solid #0091EA;
+                cursor: pointer;
+            }
+        }
+    }
+`;
+
+const PageLink: React.FC<{
+    abbr?: boolean;
+    current?: boolean;
+}> = ({ children, abbr = false, current = false }) => (
+    abbr ? (
+            <div className='abbr'>…</div>
+    ) : (
+        <Link href={`/?p=${children}`}>
+            <a>
+                <div className={current && 'current'}>{children}</div>
+            </a>
+        </Link>
+    )
+);
+
+export const PageLinks: React.FC<{ current: number; max: number; }> = ({ current, max }) => {
+    return (
+        <PageLinksDiv>
+            <PageLink current={current === 1}>1</PageLink>
+            {current > 3 && <PageLink abbr />}
+            {current > 2 && <PageLink>{current - 1}</PageLink>}
+            {current > 1 && <PageLink current>{current}</PageLink>}
+            {current < max && <PageLink>{current + 1}</PageLink>}
+            {current < max - 1 && <PageLink abbr />}
+        </PageLinksDiv>
+    );
+};

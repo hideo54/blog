@@ -1,10 +1,11 @@
 import type { InferGetStaticPropsType } from 'next';
+import { useRouter } from 'next/router';
 import { serialize } from 'next-mdx-remote/serialize';
 import dayjs from 'dayjs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
 import Layout from '../components/Layout';
-import { Archive } from '../components/atoms';
+import { Archive, PageLinks } from '../components/atoms';
 import { MDXProvider } from '../components/markdown';
 
 export const getStaticProps = async () => {
@@ -39,10 +40,14 @@ export const getStaticProps = async () => {
 };
 
 const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    archivesData.sort((a, b) => dayjs(a.data.date) > dayjs(b.data.date) ? -1 : 1)
+    const router = useRouter();
+    const pageNumber = parseInt(router.query.p as string) || 1;
+    archivesData.sort((a, b) => dayjs(a.data.date) > dayjs(b.data.date) ? -1 : 1);
+    const numArticlesPerPage = 5;
+    const archives = archivesData.slice(numArticlesPerPage * (pageNumber - 1), numArticlesPerPage * pageNumber);
     return (
         <Layout>
-            {archivesData.map(archive => (
+            {archives.map(archive => (
                 <Archive
                     key={archive.filename}
                     title={archive.data.title}
@@ -57,6 +62,7 @@ const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) =
                     <MDXProvider mdxSource={archive.excerptSource} />
                 </Archive>
             ))}
+            <PageLinks current={pageNumber} max={Math.ceil(archivesData.length / numArticlesPerPage)} />
         </Layout>
     );
 };
