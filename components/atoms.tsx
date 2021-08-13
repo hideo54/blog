@@ -64,13 +64,26 @@ const CautionP = styled.p`
 
 const TagSpan = styled.span`
     display: inline-block;
-    background: #EEEEEE;
-    margin: 4px 0;
-    margin-right: 8px;
+    position: relative;
+    margin: 0 12px;
     padding: 4px 8px;
     border: 2px solid #0091EA;
+    border-left: none;
     border-radius: 4px;
     cursor: pointer;
+    color: #0091EA;
+    &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 1em;
+        height: 1em;
+        transform: translateX(-5px) translateY(3px) rotate(45deg) scale(1.25);
+        border-left: 2px solid #0091EA;
+        border-bottom: 2px solid #0091EA;
+        border-radius: 4px;
+    }
 `;
 
 const ShareButtonSpan = styled.span`
