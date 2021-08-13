@@ -68,7 +68,9 @@ const TagSpan = styled.span`
     margin: 4px 0;
     margin-right: 8px;
     padding: 4px 8px;
+    border: 2px solid #0091EA;
     border-radius: 4px;
+    cursor: pointer;
 `;
 
 const ShareButtonSpan = styled.span`
@@ -128,7 +130,7 @@ export const Archive: React.FC<{
     return (
         <ArchiveArticle showFrame={showFrame}>
             <b>
-                <IconLink href={'/category/' + props.category} LeftIcon={Folder}>{props.category}</IconLink>
+                <IconLink href={'/categories/' + props.category} LeftIcon={Folder}>{props.category}</IconLink>
             </b>
             <h2 className='title'>
                 <Link href={'/archives/' + props.filename}>
@@ -152,7 +154,13 @@ export const Archive: React.FC<{
                 )}
             </section>
             <section>
-                {props.tags.map(tag => <TagSpan key={tag}>{tag}</TagSpan>)}
+                {props.tags.map(tag =>
+                    <Link href={`/tags/${tag}`} key={tag}>
+                        <a>
+                            <TagSpan>{tag}</TagSpan>
+                        </a>
+                    </Link>
+                )}
             </section>
             <Share />
             <hr color='#0091EA' />
