@@ -23,7 +23,7 @@
   "dependencies": {
     "@styled-icons/ionicons-outline": "^10.34.0",
     "@styled-icons/styled-icon": "^10.6.3",
-    "@types/styled-components": "^5.1.11",
+    "@types/styled-components": "^5.1.12",
     "dayjs": "^1.10.6",
     "gray-matter": "^4.0.3",
     "next": "^11.1.0",
