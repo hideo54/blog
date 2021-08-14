@@ -1,7 +1,8 @@
 import type { InferGetStaticPropsType, GetStaticPaths } from 'next';
+import { useRouter } from 'next/router';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import Layout from '../../components/Layout';
-import { Archive, IconLink } from '../../components/atoms';
+import { Archive, IconLink, PageLinks } from '../../components/atoms';
 import { MDXProvider } from '../../components/markdown';
 import { getArchivesData } from '../../lib/blog';
 
@@ -37,11 +38,15 @@ export const getStaticProps = async context => {
 };
 
 const App = ({ tag, archivesData }: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const router = useRouter();
+    const pageNumber = parseInt(router.query.p as string) || 1;
+    const numArticlesPerPage = 5;
+    const archives = archivesData.slice(numArticlesPerPage * (pageNumber - 1), numArticlesPerPage * pageNumber);
     return (
         <Layout title={`タグ: ${tag} | いうていけろ - hideo54のブログ`}>
             <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
-            <h2>タグ「{tag}」が付けられた記事の一覧</h2>
-            {archivesData.map(archive => (
+            <h2>タグ「{tag}」が付けられた記事の一覧 ({archivesData.length}件)</h2>
+            {archives.map(archive => (
                 <Archive
                     key={archive.filename}
                     title={archive.data.title}
@@ -56,6 +61,7 @@ const App = ({ tag, archivesData }: InferGetStaticPropsType<typeof getStaticProp
                     <MDXProvider mdxSource={archive.excerptSource} />
                 </Archive>
             ))}
+            <PageLinks path={`/tags/${tag}`} current={pageNumber} max={Math.ceil(archivesData.length / numArticlesPerPage)} />
         </Layout>
     );
 };

@@ -226,13 +226,14 @@ const PageLinksDiv = styled.div`
 `;
 
 const PageLink: React.FC<{
+    path: string;
     abbr?: boolean;
     current?: boolean;
-}> = ({ children, abbr = false, current = false }) => (
+}> = ({ children, path, abbr = false, current = false }) => (
     abbr ? (
             <div className='abbr'>…</div>
     ) : (
-        <Link href={children === '1' ? '/' : `/?p=${children}`}>
+        <Link href={children === '1' ? path : `${path}?p=${children}`}>
             <a>
                 <div className={current && 'current'}>{children}</div>
             </a>
@@ -240,15 +241,19 @@ const PageLink: React.FC<{
     )
 );
 
-export const PageLinks: React.FC<{ current: number; max: number; }> = ({ current, max }) => {
+export const PageLinks: React.FC<{
+    path: string;
+    current: number;
+    max: number;
+}> = ({ path, current, max }) => {
     return (
         <PageLinksDiv>
-            <PageLink current={current === 1}>1</PageLink>
-            {current > 3 && <PageLink abbr />}
-            {current > 2 && <PageLink>{current - 1}</PageLink>}
-            {current > 1 && <PageLink current>{current}</PageLink>}
-            {current < max && <PageLink>{current + 1}</PageLink>}
-            {current < max - 1 && <PageLink abbr />}
+            <PageLink path={path} current={current === 1}>1</PageLink>
+            {current > 3 && <PageLink path={path} abbr />}
+            {current > 2 && <PageLink path={path}>{current - 1}</PageLink>}
+            {current > 1 && <PageLink path={path} current>{current}</PageLink>}
+            {current < max && <PageLink path={path}>{current + 1}</PageLink>}
+            {current < max - 1 && <PageLink path={path} abbr />}
         </PageLinksDiv>
     );
 };

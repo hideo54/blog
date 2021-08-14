@@ -36,7 +36,7 @@ const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) =
                     <MDXProvider mdxSource={archive.excerptSource} />
                 </Archive>
             ))}
-            <PageLinks current={pageNumber} max={Math.ceil(archivesData.length / numArticlesPerPage)} />
+            <PageLinks path='/' current={pageNumber} max={Math.ceil(archivesData.length / numArticlesPerPage)} />
         </Layout>
     );
 };
