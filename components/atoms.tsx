@@ -86,6 +86,14 @@ const TagSpan = styled.span`
     }
 `;
 
+export const Tag: React.FC = ({ children }) => (
+    <Link href={`/tags/${children}`}>
+        <a>
+            <TagSpan>{children}</TagSpan>
+        </a>
+    </Link>
+);
+
 const ShareButtonSpan = styled.span`
     margin-right: 8px;
 `;
@@ -167,13 +175,7 @@ export const Archive: React.FC<{
                 )}
             </section>
             <section>
-                {props.tags.map(tag =>
-                    <Link href={`/tags/${tag}`} key={tag}>
-                        <a>
-                            <TagSpan>{tag}</TagSpan>
-                        </a>
-                    </Link>
-                )}
+                {props.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
             </section>
             <Share />
             <hr color='#0091EA' />
@@ -230,7 +232,7 @@ const PageLink: React.FC<{
     abbr ? (
             <div className='abbr'>…</div>
     ) : (
-        <Link href={`/?p=${children}`}>
+        <Link href={children === '1' ? '/' : `/?p=${children}`}>
             <a>
                 <div className={current && 'current'}>{children}</div>
             </a>
