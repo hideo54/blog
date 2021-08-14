@@ -9,9 +9,6 @@ import { getArchivesData } from '../../lib/blog';
 
 export const getStaticProps = async () => {
     const archivesData = await getArchivesData();
-    archivesData.sort((a, b) =>
-        dayjs(a.data.date) < dayjs(b.data.date) ? 1 : -1
-    );
     const tags = archivesData.map(archiveData => archiveData.data.tags);
     const tagCount = countBy(tags.flat());
     const tagCountsSorted = Object.entries(tagCount).sort((a, b) =>
@@ -47,7 +44,7 @@ const NoMarkLi = styled.li`
 
 const App = ({ tagCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <Layout>
+        <Layout title='タグ一覧 | いうていけろ - hideo54のブログ'>
             <h2>タグ一覧</h2>
             <p>2回以上使われているタグのみを表示しています。</p>
             <Ul>
