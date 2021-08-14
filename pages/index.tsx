@@ -1,6 +1,5 @@
 import type { InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
-import dayjs from 'dayjs';
 import Layout from '../components/Layout';
 import { Archive, PageLinks } from '../components/atoms';
 import { MDXProvider } from '../components/markdown';
@@ -18,7 +17,6 @@ export const getStaticProps = async () => {
 const App = ({ archivesData }: InferGetStaticPropsType<typeof getStaticProps>) => {
     const router = useRouter();
     const pageNumber = parseInt(router.query.p as string) || 1;
-    archivesData.sort((a, b) => dayjs(a.data.date) > dayjs(b.data.date) ? -1 : 1);
     const numArticlesPerPage = 5;
     const archives = archivesData.slice(numArticlesPerPage * (pageNumber - 1), numArticlesPerPage * pageNumber);
     return (

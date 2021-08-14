@@ -1,4 +1,5 @@
 import { serialize } from 'next-mdx-remote/serialize';
+import dayjs from 'dayjs';
 import fs from 'fs/promises';
 import matter from 'gray-matter';
 
@@ -26,5 +27,14 @@ export const getArchivesData = async () => {
             }))
         )
     );
+    archivesData.sort((a, b) => dayjs(a.data.date) < dayjs(b.data.date) ? 1 : -1);
     return archivesData;
+};
+
+export const getBodySource = async (id: string) => {
+    const archivePath = `./archives/${id}.mdx`;
+    const fileText = await fs.readFile(archivePath, 'utf-8');
+    const file = matter(fileText);
+    const bodySource = await serialize(file.content);
+    return bodySource;
 };
