@@ -79,7 +79,7 @@ const TagSpan = styled.span`
         left: 0;
         width: 1em;
         height: 1em;
-        transform: translateX(-5px) translateY(3px) rotate(45deg) scale(1.25);
+        transform: translateX(-6px) translateY(3px) rotate(45deg) scale(1.2);
         border-left: 2px solid #0091EA;
         border-bottom: 2px solid #0091EA;
         border-radius: 4px;
