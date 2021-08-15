@@ -199,6 +199,7 @@ export const Archive: React.FC<{
 const PageLinksDiv = styled.div`
     display: flex;
     justify-content: center;
+    margin-bottom: 4em;
     div {
         width: 40px;
         height: 40px;
