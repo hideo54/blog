@@ -32,7 +32,7 @@ export const IconLink: React.FC<{
         );
     }
     return (
-        <a href={href} target='_blank'>
+        <a href={href} target='_blank' rel="noreferrer">
             {left}
             {children}
             {right}
@@ -101,19 +101,19 @@ const ShareButtonSpan = styled.span`
 `;
 
 const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => {
-    const [ twttrSupported, setTwttrSupported ] = useState(false);
+    const [twttrSupported, setTwttrSupported] = useState(false);
     const containerElement = useRef<HTMLSpanElement>(null);
     useEffect(() => {
-        // @ts-ignore
+        // @ts-expect-error twttr
         if (!twttr.widgets) return;
         setTwttrSupported(true);
-        // @ts-ignore
+        // @ts-expect-error twttr
         twttr.widgets.createShareButton(url, containerElement.current, {
             text,
             lang: 'ja',
         });
         // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/javascript-factory-function
-    }, []);
+    }, [text, url]);
     return twttrSupported ? (
         <ShareButtonSpan ref={containerElement} />
     ) : (
@@ -253,7 +253,7 @@ const PageLink: React.FC<{
     current?: boolean;
 }> = ({ children, path, abbr = false, current = false }) => (
     abbr ? (
-            <div className='abbr'>…</div>
+        <div className='abbr'>…</div>
     ) : (
         <Link href={children === '1' ? path : `${path}?p=${children}`}>
             <a>

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { useState, useRef, useEffect } from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import styled from 'styled-components';
@@ -57,18 +58,18 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
     const screenName = url.split('/').splice(-3)[0];
     const tweetId = url.split('/').splice(-1)[0];
     const dark = false;
-    const [ twttrSupported, setTwttrSupported ] = useState(false);
+    const [twttrSupported, setTwttrSupported] = useState(false);
     useEffect(() => {
-        // @ts-ignore
+        // @ts-expect-error twttr
         if (!twttr.widgets) return;
         setTwttrSupported(true);
-        // @ts-ignore
+        // @ts-expect-error twttr
         twttr.widgets.createTweet(tweetId, containerElement.current, {
             theme: dark ? 'dark' : 'light',
             lang: 'ja',
         });
         // https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
-    }, []);
+    }, [tweetId, dark]);
     return (
         <TweetDiv ref={containerElement}>
             {twttrSupported || (

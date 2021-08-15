@@ -13,15 +13,15 @@ export const getStaticProps = async () => {
     const tagCount = countBy(tags.flat());
     const tagCountsSorted = Object.entries(tagCount).sort((a, b) =>
         a[1] < b[1] ? 1 : -1
-    ).filter(([ , tagCount ]) => tagCount > 1)
-    .map(([ tag, tagCount ]) => ({
-        tag, tagCount,
-        latest: dayjs(
-            archivesData.filter(
-                archiveData => archiveData.data.tags.includes(tag)
-            )[0].data.date
-        ).format('YYYY年M月D日'),
-    }));
+    ).filter(([, tagCount]) => tagCount > 1)
+        .map(([tag, tagCount]) => ({
+            tag, tagCount,
+            latest: dayjs(
+                archivesData.filter(
+                    archiveData => archiveData.data.tags.includes(tag)
+                )[0].data.date
+            ).format('YYYY年M月D日'),
+        }));
     return {
         props: {
             tagCountsSorted,

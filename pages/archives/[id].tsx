@@ -1,5 +1,4 @@
 import type { InferGetStaticPropsType, GetStaticPaths } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import Layout from '../../components/Layout';
 import { Archive, IconLink, WrapperWithSidebar } from '../../components/atoms';

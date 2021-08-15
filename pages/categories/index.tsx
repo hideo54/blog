@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     const categoryCount = countBy(categories);
     const categoryCountsSorted = Object.entries(categoryCount).sort((a, b) =>
         a[1] < b[1] ? 1 : -1
-    ).map(([ category, categoryCount ]) => ({
+    ).map(([category, categoryCount]) => ({
         category, categoryCount,
         latest: dayjs(
             archivesData.filter(

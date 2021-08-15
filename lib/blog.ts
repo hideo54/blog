@@ -22,8 +22,8 @@ export const getArchivesData = async () => {
                     update: data.update ? data.update?.toISOString() : null,
                 };
                 const excerptSourcePromise = serialize(file.excerpt);
-                return Promise.all([ serializableData, excerptSourcePromise ]);
-            }).then(([ data, excerptSource ]) => ({
+                return Promise.all([serializableData, excerptSourcePromise]);
+            }).then(([data, excerptSource]) => ({
                 data, excerptSource,
                 filename: filename.split('.')[0],
             }))
@@ -42,7 +42,7 @@ export const getCategoryCounts = async (archivesData: {
     const categoryCount = countBy(categories);
     const categoryCountsSorted = Object.entries(categoryCount).sort((a, b) =>
         a[1] < b[1] ? 1 : -1
-    ).map(([ category, categoryCount ]) => ({
+    ).map(([category, categoryCount]) => ({
         category, categoryCount,
         latest: dayjs(
             archivesData.filter(
@@ -62,15 +62,15 @@ export const getTagCounts = async (archivesData: {
     const tagCount = countBy(tags.flat());
     const tagCountsSorted = Object.entries(tagCount).sort((a, b) =>
         a[1] < b[1] ? 1 : -1
-    ).filter(([ , tagCount ]) => tagCount > 1)
-    .map(([ tag, tagCount ]) => ({
-        tag, tagCount,
-        latest: dayjs(
-            archivesData.filter(
-                archiveData => archiveData.data.tags.includes(tag)
-            )[0].data.date
-        ).format('YYYY年M月D日'),
-    }));
+    ).filter(([, tagCount]) => tagCount > 1)
+        .map(([tag, tagCount]) => ({
+            tag, tagCount,
+            latest: dayjs(
+                archivesData.filter(
+                    archiveData => archiveData.data.tags.includes(tag)
+                )[0].data.date
+            ).format('YYYY年M月D日'),
+        }));
     return tagCountsSorted;
 };
 
