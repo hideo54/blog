@@ -1,4 +1,4 @@
-import type { InferGetStaticPropsType, GetStaticPaths } from 'next';
+import type { InferGetStaticPropsType, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import Layout from '../../components/Layout';
 import { Archive, IconLink, WrapperWithSidebar } from '../../components/atoms';
@@ -18,8 +18,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export const getStaticProps = async context => {
-    const id = context.params.id as string;
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+    const id = context.params?.id as string;
     const archivesData = await getArchivesData();
     const archiveData = archivesData.filter(archiveData => archiveData.filename === id)[0];
     const bodySource = await getBodySource(id);
@@ -44,7 +44,7 @@ const App = ({ archiveData, bodySource, categoryCountsSorted, tagCountsSorted }:
                     key={archiveData.filename}
                     title={archiveData.data.title}
                     date={archiveData.data.date}
-                    update={archiveData.data.update}
+                    update={archiveData.data.update || undefined}
                     filename={archiveData.filename}
                     category={archiveData.data.category}
                     tags={archiveData.data.tags}

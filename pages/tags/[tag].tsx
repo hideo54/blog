@@ -1,4 +1,4 @@
-import type { InferGetStaticPropsType, GetStaticPaths } from 'next';
+import type { InferGetStaticPropsType, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import Layout from '../../components/Layout';
@@ -23,8 +23,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export const getStaticProps = async context => {
-    const tag = context.params.tag as string;
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+    const tag = context.params?.tag as string;
     const allArchivesData = await getArchivesData();
     const archivesData = allArchivesData.filter(archiveData =>
         archiveData.data.tags.includes(tag)
@@ -51,7 +51,7 @@ const App = ({ tag, archivesData }: InferGetStaticPropsType<typeof getStaticProp
                     key={archive.filename}
                     title={archive.data.title}
                     date={archive.data.date}
-                    update={archive.data.update}
+                    update={archive.data.update || undefined}
                     filename={archive.filename}
                     category={archive.data.category}
                     tags={archive.data.tags}

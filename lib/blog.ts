@@ -21,7 +21,7 @@ export const getArchivesData = async () => {
                     date: data.date.toISOString(),
                     update: data.update ? data.update?.toISOString() : null,
                 };
-                const excerptSourcePromise = serialize(file.excerpt);
+                const excerptSourcePromise = serialize(file.excerpt!);
                 return Promise.all([serializableData, excerptSourcePromise]);
             }).then(([data, excerptSource]) => ({
                 data, excerptSource,

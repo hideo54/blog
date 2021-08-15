@@ -5,15 +5,15 @@ import { GA_TRACKING_ID } from '../lib/gtag';
 const minify = (s: string) => s.replace(/(\s{4}|\n)/g, '');
 
 export default class MyDocument extends Document {
-    static async getInitialProps(ctx) {
+    static async getInitialProps(ctx: any) {
         const sheet = new ServerStyleSheet();
         const originalRenderPage = ctx.renderPage;
 
         try {
             ctx.renderPage = () => (
                 originalRenderPage({
-                    enhanceApp: App =>
-                        props => sheet.collectStyles(<App {...props} />)
+                    enhanceApp: (App: any) =>
+                        (props: any) => sheet.collectStyles(<App {...props} />)
                     ,
                 })
             );
