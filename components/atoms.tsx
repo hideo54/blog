@@ -1,7 +1,9 @@
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import type { StyledIcon } from '@styled-icons/styled-icon';
 import { Folder, Calendar, Open } from '@styled-icons/ionicons-outline';
+import { Twitter } from '@styled-icons/fa-brands';
 import dayjs, { Dayjs } from 'dayjs';
 import qs from 'querystring';
 
@@ -98,12 +100,30 @@ const ShareButtonSpan = styled.span`
     margin-right: 8px;
 `;
 
-const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => (
-    // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
-    <ShareButtonSpan>
-        <a className='twitter-share-button' href={'https://twitter.com/intent/tweet?' + qs.stringify({ text, url })}>Tweet</a>
-    </ShareButtonSpan>
-);
+const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => {
+    const [ twttrSupported, setTwttrSupported ] = useState(false);
+    const containerElement = useRef<HTMLSpanElement>(null);
+    useEffect(() => {
+        // @ts-ignore
+        if (!twttr.widgets) return;
+        setTwttrSupported(true);
+        // @ts-ignore
+        twttr.widgets.createShareButton(url, containerElement.current, {
+            text,
+            lang: 'ja',
+        });
+        // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/javascript-factory-function
+    }, []);
+    return twttrSupported ? (
+        <ShareButtonSpan ref={containerElement} />
+    ) : (
+        <ShareButtonSpan ref={containerElement}>
+            <IconLink LeftIcon={Twitter} href={`https://twitter.com/intent/tweet?${qs.stringify({ text, url })}`}>
+                ツイート
+            </IconLink>
+        </ShareButtonSpan>
+    );
+};
 
 const HatenaBookmarkButton: React.FC<{ path: string; }> = ({ path }) => (
     // https://b.hatena.ne.jp/guide/bbutton
@@ -140,7 +160,7 @@ export const Archive: React.FC<{
     const isExcerpt = props.isExcerpt || false;
     const showFrame = props.showFrame || false;
     const Share = () => (
-        <div>
+        <div style={{ display: 'flex' }}>
             <TweetButton
                 text={`${props.title} | いうていけろ - hideo54のブログ`}
                 url={`https://blog.hideo54.com/archives/${props.filename}`}

@@ -1,7 +1,8 @@
+import { useState, useRef, useEffect } from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import styled from 'styled-components';
 import { Open } from '@styled-icons/ionicons-outline';
-import { useRef, useEffect } from 'react';
+import { Twitter } from '@styled-icons/fa-brands';
 import { IconLink } from './atoms';
 
 const H2 = styled.h2`
@@ -56,14 +57,27 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
     const screenName = url.split('/').splice(-3)[0];
     const tweetId = url.split('/').splice(-1)[0];
     const dark = false;
+    const [ twttrSupported, setTwttrSupported ] = useState(false);
     useEffect(() => {
         // @ts-ignore
-        twttr.widgets.createTweet(tweetId, containerElement.current, dark && { theme: 'dark' });
+        if (!twttr.widgets) return;
+        setTwttrSupported(true);
+        // @ts-ignore
+        twttr.widgets.createTweet(tweetId, containerElement.current, {
+            theme: dark ? 'dark' : 'light',
+            lang: 'ja',
+        });
         // https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
     }, []);
     return (
         <TweetDiv ref={containerElement}>
-            {/* <IconLink RightIcon={Open} href={url}>@{screenName}のツイート</IconLink> */}
+            {twttrSupported || (
+                <div style={{ textAlign: 'center' }}>
+                    <IconLink LeftIcon={Twitter} RightIcon={Open} href={url}>
+                        @{screenName}のツイート
+                    </IconLink>
+                </div>
+            )}
         </TweetDiv>
     );
 };
