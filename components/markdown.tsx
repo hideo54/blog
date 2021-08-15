@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import styled from 'styled-components';
 import { Open } from '@styled-icons/ionicons-outline';
@@ -84,16 +84,16 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
 };
 
 const components = {
-    h1: props => <H2 {...props} />, // h1 も h2 にする
-    h2: props => <H2 {...props} />,
-    blockquote: props => <Blockquote {...props} />,
-    inlineCode: props => <Code {...props} />,
-    pre: props => <Pre {...props} />,
+    h1: (props: React.ComponentPropsWithoutRef<'h2'>) => <H2 {...props} />, // h1 も h2 にする
+    h2: (props: React.ComponentPropsWithoutRef<'h2'>) => <H2 {...props} />,
+    blockquote: (props: React.ComponentPropsWithoutRef<'blockquote'>) => <Blockquote {...props} />,
+    inlineCode: (props: React.ComponentPropsWithoutRef<'code'>) => <Code {...props} />,
+    pre: (props: React.ComponentPropsWithoutRef<'pre'>) => <Pre {...props} />,
     hr: () => <Hr />,
-    a: props => <IconLink RightIcon={Open} {...props} />,
-    img: props => <Img {...props} />,
+    a: (props: { href: string; }) => <IconLink RightIcon={Open} {...props} />,
+    img: (props: React.ComponentPropsWithoutRef<'img'>) => <Img {...props} />,
     // https://mdxjs.com/table-of-components
-    Tweet: props => <Tweet {...props} />,
+    Tweet: (props: { url: string; }) => <Tweet {...props} />,
 };
 
 export const MDXProvider: React.FC<{ mdxSource: MDXRemoteSerializeResult; }> = ({ mdxSource }) => (
