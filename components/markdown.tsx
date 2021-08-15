@@ -27,6 +27,7 @@ const Pre = styled.pre`
 
 const Hr = styled.hr`
     border-top: 1px dashed #BBBBBB;
+    color: transparent;
 `;
 
 const Img = styled.img`

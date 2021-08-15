@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import type { StyledIcon } from '@styled-icons/styled-icon';
-import { Folder, Calendar } from '@styled-icons/ionicons-outline';
+import { Folder, Calendar, Open } from '@styled-icons/ionicons-outline';
 import dayjs, { Dayjs } from 'dayjs';
 import qs from 'querystring';
 
@@ -65,7 +65,7 @@ const CautionP = styled.p`
 const TagSpan = styled.span`
     display: inline-block;
     position: relative;
-    margin: 0 12px;
+    margin: 4px 12px;
     padding: 4px 8px;
     border: 2px solid #0091EA;
     border-left: none;
@@ -219,6 +219,7 @@ const PageLinksDiv = styled.div`
             }
             &:not(.current) {
                 border: 2px solid #0091EA;
+                color: #0091EA;
                 cursor: pointer;
             }
         }
@@ -235,7 +236,7 @@ const PageLink: React.FC<{
     ) : (
         <Link href={children === '1' ? path : `${path}?p=${children}`}>
             <a>
-                <div className={current && 'current'}>{children}</div>
+                <div className={current ? 'current' : ''}>{children}</div>
             </a>
         </Link>
     )
@@ -255,5 +256,117 @@ export const PageLinks: React.FC<{
             {current < max && <PageLink path={path}>{current + 1}</PageLink>}
             {current < max - 1 && <PageLink path={path} abbr />}
         </PageLinksDiv>
+    );
+};
+
+const WrapperDiv = styled.div`
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    @media (min-width: 881px) {
+        aside {
+            width: 30%;
+            margin-right: 1em;
+        }
+        .main {
+            width: 65%;
+            margin-left: 1em;
+        }
+    }
+    @media (max-width: 880px) {
+        aside {
+            width: 100%;
+            margin-right: 1em;
+        }
+    }
+`;
+
+const FrameDiv = styled.div`
+    margin: 2em 0;
+    padding: 1em;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #CCCCCC;
+`;
+
+const Ul = styled.ul<{ inlineBlockLi?: boolean }>`
+    padding-left: 0;
+    li {
+        list-style: none;
+        ${props => props.inlineBlockLi && `
+            display: inline-block;
+        `}
+    }
+`;
+
+export const WrapperWithSidebar: React.FC<{
+    data: {
+        categoryCountsSorted: {
+            category: string;
+            categoryCount: number;
+            latest: string;
+        }[];
+        tagCountsSorted: {
+            tag: string;
+            tagCount: number;
+            latest: string;
+        }[];
+    };
+}> = ({ children, data }) => {
+    const introColumn = (
+        <FrameDiv>
+            <h2>hideo54</h2>
+            <p>
+                情報技術や社会が好きな学生です。
+                <br />
+                詳しくは <IconLink RightIcon={Open} href='https://hideo54.com'>hideo54.com</IconLink> へ。
+            </p>
+            <p>
+                Twitter: <IconLink RightIcon={Open} href='https://twitter.com/hideo54'>@hideo54</IconLink>
+            </p>
+        </FrameDiv>
+    );
+    const categoriesColumn = (
+        <FrameDiv>
+            <h2>カテゴリ</h2>
+            <Ul>
+                {data.categoryCountsSorted.map(categoryCount => (
+                    <li key={categoryCount.category}>
+                        <IconLink LeftIcon={Folder} href={`/categories/${categoryCount.category}`}>
+                            {categoryCount.category} ({categoryCount.categoryCount})
+                        </IconLink>
+                        <br />
+                        <span>最新: {categoryCount.latest}</span>
+                    </li>
+                ))}
+            </Ul>
+        </FrameDiv>
+    );
+    const tagsColumn = (
+        <FrameDiv>
+            <h2>タグ</h2>
+            <Ul inlineBlockLi>
+                {data.tagCountsSorted.map(tagCount => (
+                    <li key={tagCount.tag}>
+                        <Tag>
+                            {tagCount.tag}
+                        </Tag>
+                    </li>
+                ))}
+            </Ul>
+        </FrameDiv>
+    );
+    return (
+        <WrapperDiv>
+            <div className='main'>
+                {children}
+            </div>
+            <aside>
+                {introColumn}
+                {categoriesColumn}
+                {tagsColumn}
+            </aside>
+        </WrapperDiv>
     );
 };

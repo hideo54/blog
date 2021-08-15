@@ -2,9 +2,9 @@ import type { InferGetStaticPropsType, GetStaticPaths } from 'next';
 import { serialize } from 'next-mdx-remote/serialize';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import Layout from '../../components/Layout';
-import { Archive, IconLink } from '../../components/atoms';
+import { Archive, IconLink, WrapperWithSidebar } from '../../components/atoms';
 import { MDXProvider } from '../../components/markdown';
-import { getArchivesData, getBodySource } from '../../lib/blog';
+import { getArchivesData, getBodySource, getCategoryCounts, getTagCounts } from '../../lib/blog';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const archivesData = await getArchivesData();
@@ -24,29 +24,35 @@ export const getStaticProps = async context => {
     const archivesData = await getArchivesData();
     const archiveData = archivesData.filter(archiveData => archiveData.filename === id)[0];
     const bodySource = await getBodySource(id);
+    const categoryCountsSorted = await getCategoryCounts(archivesData);
+    const tagCountsSorted = await getTagCounts(archivesData);
     return {
         props: {
             archiveData,
             bodySource,
+            categoryCountsSorted,
+            tagCountsSorted,
         },
     };
 };
 
-const App = ({ archiveData, bodySource }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const App = ({ archiveData, bodySource, categoryCountsSorted, tagCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <Layout title={`${archiveData.data.title} | いうていけろ - hideo54のブログ`}>
-            <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
-            <Archive
-                key={archiveData.filename}
-                title={archiveData.data.title}
-                date={archiveData.data.date}
-                update={archiveData.data.update}
-                filename={archiveData.filename}
-                category={archiveData.data.category}
-                tags={archiveData.data.tags}
-            >
-                <MDXProvider mdxSource={bodySource} />
-            </Archive>
+            <WrapperWithSidebar data={{ categoryCountsSorted, tagCountsSorted }}>
+                <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
+                <Archive
+                    key={archiveData.filename}
+                    title={archiveData.data.title}
+                    date={archiveData.data.date}
+                    update={archiveData.data.update}
+                    filename={archiveData.filename}
+                    category={archiveData.data.category}
+                    tags={archiveData.data.tags}
+                >
+                    <MDXProvider mdxSource={bodySource} />
+                </Archive>
+            </WrapperWithSidebar>
         </Layout>
     );
 };

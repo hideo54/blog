@@ -21,7 +21,6 @@ export const getStaticProps = async () => {
             )[0].data.date
         ).format('YYYY年M月D日'),
     }));
-    console.log(categoryCountsSorted);
     return {
         props: {
             categoryCountsSorted,
