@@ -33,7 +33,7 @@
     "next-mdx-remote": "^3.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "styled-components": "^5.3.0"
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@hideo54/eslint-config": "^1.0.5",
