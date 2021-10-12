@@ -40,6 +40,6 @@
     "@types/lodash": "^4.14.175",
     "@types/react": "^17.0.27",
     "eslint": "^8.0.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.4"
   }
 }
