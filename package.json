@@ -36,7 +36,7 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@hideo54/eslint-config": "^1.0.10",
+    "@hideo54/eslint-config": "^1.0.12",
     "@types/lodash": "^4.14.176",
     "@types/react": "^17.0.33",
     "eslint": "^8.1.0",
