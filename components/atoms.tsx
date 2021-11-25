@@ -1,45 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import type { StyledIcon } from '@styled-icons/styled-icon';
 import { Folder, Calendar, Open } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
+import { IconAnchor, IconNextLink } from '@hideo54/reactor';
 import dayjs, { Dayjs } from 'dayjs';
 import qs from 'querystring';
-
-export const IconLink: React.FC<{
-    LeftIcon?: StyledIcon;
-    RightIcon?: StyledIcon;
-    href: string;
-}> = ({ children, LeftIcon, RightIcon, href }) => {
-    const left = LeftIcon && <LeftIcon size={'1.2em'} style={{
-        verticalAlign: 'text-bottom',
-        marginRight: '0.2em',
-    }} />;
-    const right = RightIcon && <RightIcon size={'1.2em'} style={{
-        verticalAlign: 'text-bottom',
-        marginLeft: '0.2em',
-    }} />;
-    if (href.startsWith('/')) {
-        return (
-            <Link href={href}>
-                <a>
-                    {left}
-                    {children}
-                    {right}
-                </a>
-            </Link>
-        );
-    }
-    return (
-        <a href={href} target='_blank' rel="noreferrer">
-            {left}
-            {children}
-            {right}
-        </a>
-    );
-};
 
 const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
     ${props => props.showFrame ? `
@@ -119,9 +85,9 @@ const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) =>
         <ShareButtonSpan ref={containerElement} />
     ) : (
         <ShareButtonSpan ref={containerElement}>
-            <IconLink LeftIcon={Twitter} href={`https://twitter.com/intent/tweet?${qs.stringify({ text, url })}`}>
+            <IconAnchor LeftIcon={Twitter} href={`https://twitter.com/intent/tweet?${qs.stringify({ text, url })}`}>
                 ツイート
-            </IconLink>
+            </IconAnchor>
         </ShareButtonSpan>
     );
 };
@@ -172,7 +138,7 @@ export const Archive: React.FC<{
     return (
         <ArchiveArticle showFrame={showFrame}>
             <b>
-                <IconLink href={'/categories/' + props.category} LeftIcon={Folder}>{props.category}</IconLink>
+                <IconNextLink href={'/categories/' + props.category} LeftIcon={Folder}>{props.category}</IconNextLink>
             </b>
             <h2 className='title'>
                 <Link href={'/archives/' + props.filename}>
@@ -182,9 +148,17 @@ export const Archive: React.FC<{
                 </Link>
             </h2>
             <section>
-                <IconLink href={'/archives?month=' + dayjs(props.date).format('YYYY-MM')} LeftIcon={Calendar}>
+                <IconNextLink
+                    href={{
+                        pathname: '/archives',
+                        query: {
+                            month: dayjs(props.date).format('YYYY-MM'),
+                        },
+                    }}
+                    LeftIcon={Calendar}
+                >
                     {dayjs(props.date).format('YYYY年M月')}
-                </IconLink>
+                </IconNextLink>
                 <span>
                     {dayjs(props.date).format('D日')}
                     {update !== props.date && ` (最終更新: ${dayjs(update).format('YYYY年M月D日')})`}
@@ -342,10 +316,10 @@ export const WrapperWithSidebar: React.FC<{
             <p>
                 情報技術や社会が好きな学生です。
                 <br />
-                詳しくは <IconLink RightIcon={Open} href='https://hideo54.com'>hideo54.com</IconLink> へ。
+                詳しくは <IconAnchor RightIcon={Open} href='https://hideo54.com'>hideo54.com</IconAnchor> へ。
             </p>
             <p>
-                Twitter: <IconLink RightIcon={Open} href='https://twitter.com/hideo54'>@hideo54</IconLink>
+                Twitter: <IconAnchor RightIcon={Open} href='https://twitter.com/hideo54'>@hideo54</IconAnchor>
             </p>
         </FrameDiv>
     );
@@ -355,9 +329,9 @@ export const WrapperWithSidebar: React.FC<{
             <Ul>
                 {data.categoryCountsSorted.map(categoryCount => (
                     <li key={categoryCount.category}>
-                        <IconLink LeftIcon={Folder} href={`/categories/${categoryCount.category}`}>
+                        <IconNextLink LeftIcon={Folder} href={`/categories/${categoryCount.category}`}>
                             {categoryCount.category} ({categoryCount.categoryCount})
-                        </IconLink>
+                        </IconNextLink>
                         <br />
                         <span>最新: {categoryCount.latest}</span>
                     </li>
