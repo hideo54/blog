@@ -45,7 +45,7 @@ const App = ({ tag, archivesData }: InferGetStaticPropsType<typeof getStaticProp
     const archives = archivesData.slice(numArticlesPerPage * (pageNumber - 1), numArticlesPerPage * pageNumber);
     return (
         <Layout title={`タグ: ${tag} | いうていけろ - hideo54のブログ`}>
-            <IconNextLink LeftIcon={ChevronBack} href='/'>トップページ</IconNextLink>
+            <IconNextLink LeftIcon={ChevronBack} href='/tags'>タグ一覧</IconNextLink>
             <h2>タグ「{tag}」が付けられた記事の一覧 ({archivesData.length}件)</h2>
             {archives.map(archive => (
                 <Archive

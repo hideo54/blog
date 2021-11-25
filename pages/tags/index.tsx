@@ -1,6 +1,6 @@
 import type { InferGetStaticPropsType } from 'next';
 import styled from 'styled-components';
-import { Close } from '@styled-icons/ionicons-outline';
+import { ChevronBack, Close } from '@styled-icons/ionicons-outline';
 import { IconNextLink } from '@hideo54/reactor';
 import { countBy } from 'lodash';
 import dayjs from 'dayjs';
@@ -46,6 +46,7 @@ const NoMarkLi = styled.li`
 const App = ({ tagCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <Layout title='タグ一覧 | いうていけろ - hideo54のブログ'>
+            <IconNextLink href='/' LeftIcon={ChevronBack}>トップページ</IconNextLink>
             <h2>タグ一覧</h2>
             <p>2回以上使われているタグのみを表示しています。</p>
             <Ul>

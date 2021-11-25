@@ -18,6 +18,10 @@ const LogoTypeDiv = styled.div`
         font-size: 1.5em;
         font-weight: 200;
     }
+
+    a:hover {
+        text-decoration: none;
+    }
 `;
 
 const NormalHeader = (
