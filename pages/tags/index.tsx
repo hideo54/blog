@@ -1,10 +1,11 @@
 import type { InferGetStaticPropsType } from 'next';
 import styled from 'styled-components';
 import { Close } from '@styled-icons/ionicons-outline';
+import { IconNextLink } from '@hideo54/reactor';
 import { countBy } from 'lodash';
 import dayjs from 'dayjs';
 import Layout from '../../components/Layout';
-import { IconLink, Tag } from '../../components/atoms';
+import { Tag } from '../../components/atoms';
 import { getArchivesData } from '../../lib/blog';
 
 export const getStaticProps = async () => {
@@ -51,9 +52,9 @@ const App = ({ tagCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>
                 {tagCountsSorted.map(tagCount => (
                     <NoMarkLi key={tagCount.tag}>
                         <Tag>{tagCount.tag}</Tag>
-                        <IconLink LeftIcon={Close} href={`/tags/${tagCount.tag}`}>
+                        <IconNextLink LeftIcon={Close} href={`/tags/${tagCount.tag}`}>
                             {tagCount.tagCount}
-                        </IconLink>
+                        </IconNextLink>
                         <br />
                         <span>最新: {tagCount.latest}</span>
                     </NoMarkLi>

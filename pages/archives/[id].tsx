@@ -1,7 +1,8 @@
 import type { InferGetStaticPropsType, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
+import { IconNextLink } from '@hideo54/reactor';
 import Layout from '../../components/Layout';
-import { Archive, IconLink, WrapperWithSidebar } from '../../components/atoms';
+import { Archive, WrapperWithSidebar } from '../../components/atoms';
 import { MDXProvider } from '../../components/markdown';
 import { getArchivesData, getBodySource, getCategoryCounts, getTagCounts } from '../../lib/blog';
 
@@ -39,7 +40,7 @@ const App = ({ archiveData, bodySource, categoryCountsSorted, tagCountsSorted }:
     return (
         <Layout title={`${archiveData.data.title} | いうていけろ - hideo54のブログ`}>
             <WrapperWithSidebar data={{ categoryCountsSorted, tagCountsSorted }}>
-                <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
+                <IconNextLink LeftIcon={ChevronBack} href='/'>トップページ</IconNextLink>
                 <Archive
                     key={archiveData.filename}
                     title={archiveData.data.title}

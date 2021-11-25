@@ -1,10 +1,9 @@
-/* eslint-disable react/display-name */
 import React, { useState, useRef, useEffect } from 'react';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import styled from 'styled-components';
 import { Open } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
-import { IconLink } from './atoms';
+import { IconAnchor, IconNextLink } from '@hideo54/reactor';
 
 const H2 = styled.h2`
     border-left: 4px solid #0091EA;
@@ -74,9 +73,9 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
         <TweetDiv ref={containerElement}>
             {twttrSupported || (
                 <div style={{ textAlign: 'center' }}>
-                    <IconLink LeftIcon={Twitter} RightIcon={Open} href={url}>
+                    <IconAnchor LeftIcon={Twitter} RightIcon={Open} href={url}>
                         @{screenName}のツイート
-                    </IconLink>
+                    </IconAnchor>
                 </div>
             )}
         </TweetDiv>
@@ -90,7 +89,9 @@ const components = {
     inlineCode: (props: React.ComponentPropsWithoutRef<'code'>) => <Code {...props} />,
     pre: (props: React.ComponentPropsWithoutRef<'pre'>) => <Pre {...props} />,
     hr: () => <Hr />,
-    a: (props: { href: string; }) => <IconLink RightIcon={Open} {...props} />,
+    a: (props: { href: string; }) => props.href.startsWith('/')
+        ? <IconNextLink {...props}/>
+        : <IconAnchor RightIcon={Open} {...props} />,
     img: (props: React.ComponentPropsWithoutRef<'img'>) => <Img {...props} />,
     // https://mdxjs.com/table-of-components
     Tweet: (props: { url: string; }) => <Tweet {...props} />,

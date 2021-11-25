@@ -1,10 +1,10 @@
 import type { InferGetStaticPropsType } from 'next';
 import styled from 'styled-components';
 import { ChevronBack, Folder } from '@styled-icons/ionicons-outline';
+import { IconNextLink } from '@hideo54/reactor';
 import { countBy } from 'lodash';
 import dayjs from 'dayjs';
 import Layout from '../../components/Layout';
-import { IconLink } from '../../components/atoms';
 import { getArchivesData } from '../../lib/blog';
 
 export const getStaticProps = async () => {
@@ -44,14 +44,14 @@ const NoMarkLi = styled.li`
 const App = ({ categoryCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <Layout title='カテゴリ一覧 | いうていけろ - hideo54のブログ'>
-            <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
+            <IconNextLink LeftIcon={ChevronBack} href='/'>トップページ</IconNextLink>
             <h2>カテゴリ一覧</h2>
             <Ul>
                 {categoryCountsSorted.map(categoryCount => (
                     <NoMarkLi key={categoryCount.category}>
-                        <IconLink LeftIcon={Folder} href={`/categories/${categoryCount.category}`}>
+                        <IconNextLink LeftIcon={Folder} href={`/categories/${categoryCount.category}`}>
                             {categoryCount.category} ({categoryCount.categoryCount})
-                        </IconLink>
+                        </IconNextLink>
                         <br />
                         <span>最新: {categoryCount.latest}</span>
                     </NoMarkLi>

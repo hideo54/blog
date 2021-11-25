@@ -1,8 +1,9 @@
 import type { InferGetStaticPropsType, GetStaticPaths, GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
+import { IconNextLink } from '@hideo54/reactor';
 import Layout from '../../components/Layout';
-import { Archive, IconLink, PageLinks } from '../../components/atoms';
+import { Archive, PageLinks } from '../../components/atoms';
 import { MDXProvider } from '../../components/markdown';
 import { getArchivesData } from '../../lib/blog';
 
@@ -44,7 +45,7 @@ const App = ({ tag, archivesData }: InferGetStaticPropsType<typeof getStaticProp
     const archives = archivesData.slice(numArticlesPerPage * (pageNumber - 1), numArticlesPerPage * pageNumber);
     return (
         <Layout title={`タグ: ${tag} | いうていけろ - hideo54のブログ`}>
-            <IconLink LeftIcon={ChevronBack} href='/'>トップページ</IconLink>
+            <IconNextLink LeftIcon={ChevronBack} href='/'>トップページ</IconNextLink>
             <h2>タグ「{tag}」が付けられた記事の一覧 ({archivesData.length}件)</h2>
             {archives.map(archive => (
                 <Archive
