@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Folder, Calendar, Open, ChevronForward } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
-import { IconAnchor, IconNextLink } from '@hideo54/reactor';
+import { IconSpan, IconAnchor, IconNextLink } from '@hideo54/reactor';
 import dayjs, { Dayjs } from 'dayjs';
 import qs from 'querystring';
 
@@ -148,7 +148,10 @@ export const Archive: React.FC<{
                 </Link>
             </h2>
             <section>
-                <IconNextLink
+                <IconSpan LeftIcon={Calendar}>
+                    {dayjs(props.date).format('YYYY年M月')}
+                </IconSpan>
+                {/* <IconNextLink
                     href={{
                         pathname: '/archives',
                         query: {
@@ -158,7 +161,7 @@ export const Archive: React.FC<{
                     LeftIcon={Calendar}
                 >
                     {dayjs(props.date).format('YYYY年M月')}
-                </IconNextLink>
+                </IconNextLink> */}
                 <span>
                     {dayjs(props.date).format('D日')}
                     {update !== props.date && ` (最終更新: ${dayjs(update).format('YYYY年M月D日')})`}
