@@ -1,7 +1,8 @@
-import { ReactNode } from 'react';
+import { IconAnchor } from '@hideo54/reactor';
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Github } from '@styled-icons/fa-brands';
 
 const LogoTypeDiv = styled.div`
     text-align: center;
@@ -37,20 +38,49 @@ const NormalHeader = (
     </LogoTypeDiv>
 );
 
-const Layout = ({
+const FooterDiv = styled.footer`
+    text-align: center;
+    margin: 2em 0;
+
+    div {
+        margin: 1em 0;
+    }
+
+    hr {
+        margin-bottom: 1em;
+        border-top: 1px solid #BBBBBB;
+        color: transparent;
+    }
+`;
+
+const NormalFooter = (
+    <FooterDiv>
+        <hr />
+        <div>© hideo54</div>
+        <div>
+            このブログテーマは
+            <IconAnchor href='https://github.com/hideo54/blog' LeftIcon={Github}>
+                オープンソースです。
+            </IconAnchor>
+        </div>
+    </FooterDiv>
+);
+
+const Layout: React.FC<{
+    title?: string;
+    description?: string;
+    imageUrl?: string;
+    twitterCardType?: 'summary' | 'summary_large_image' | 'app' | 'player';
+    header?: JSX.Element;
+    footer?: JSX.Element;
+}> = ({
     children,
     title = 'いうていけろ | hideo54のブログ',
     description = 'hideo54のブログ',
     imageUrl = 'https://img.hideo54.com/icons/main.png',
     twitterCardType = 'summary',
     header = NormalHeader,
-}: {
-    children?: ReactNode;
-    title?: string;
-    description?: string;
-    imageUrl?: string;
-    twitterCardType?: 'summary' | 'summary_large_image' | 'app' | 'player';
-    header?: JSX.Element;
+    footer = NormalFooter,
 }) => (
     <>
         <Head>
@@ -73,6 +103,7 @@ const Layout = ({
         <main>
             {children}
         </main>
+        {footer && <footer>{footer}</footer>}
     </>
 );
 

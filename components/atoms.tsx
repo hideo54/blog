@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Folder, Calendar, Open } from '@styled-icons/ionicons-outline';
+import { Folder, Calendar, Open, ChevronForward } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
 import { IconAnchor, IconNextLink } from '@hideo54/reactor';
 import dayjs, { Dayjs } from 'dayjs';
@@ -178,9 +178,9 @@ export const Archive: React.FC<{
                 {props.children}
             </section>
             {isExcerpt ? (
-                <Link href={'/archives/' + props.filename}>
+                <IconNextLink href={'/archives/' + props.filename} RightIcon={ChevronForward}>
                     <a>続きを読む</a>
-                </Link>
+                </IconNextLink>
             ) : (
                 <>
                     <hr color='#0091EA' />
@@ -194,7 +194,6 @@ export const Archive: React.FC<{
 const PageLinksDiv = styled.div`
     display: flex;
     justify-content: center;
-    margin-bottom: 4em;
     div {
         width: 40px;
         height: 40px;
