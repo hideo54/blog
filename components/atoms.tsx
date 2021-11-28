@@ -13,6 +13,9 @@ const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
         padding: 1em;
         border-radius: 20px;
         box-shadow: 0 0 10px #CCCCCC;
+        @media (prefers-color-scheme: dark) {
+            box-shadow: 0 0 10px #444444;
+        }
     ` : `
         margin: 1em 0;
     `}
@@ -286,6 +289,9 @@ const FrameDiv = styled.div`
     padding: 1em;
     border-radius: 20px;
     box-shadow: 0 0 10px #CCCCCC;
+    @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0 10px #444444;
+    }
 `;
 
 const Ul = styled.ul<{ inlineBlockLi?: boolean }>`

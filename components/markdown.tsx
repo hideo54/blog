@@ -12,18 +12,26 @@ const H2 = styled.h2`
 `;
 
 const Code = styled.code`
-    background: #EEEEEE;
     margin: 2px;
     padding: 2px 4px;
     line-height: 2em;
     border-radius: 4px;
+    background-color: #eeeeee;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: #222222;
+    }
 `;
 
 const Pre = styled.pre`
-    background: #EEEEEE;
     padding: 8px;
     border-radius: 8px;
     overflow: auto;
+    background-color: #eeeeee;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: #222222;
+    }
 `;
 
 const Hr = styled.hr`
@@ -43,6 +51,13 @@ const Blockquote = styled.blockquote`
 
     p {
         color: #888888;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        border-color: #888888;
+        p {
+            color: #CCCCCC;
+        }
     }
 `;
 

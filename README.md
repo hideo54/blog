@@ -12,7 +12,6 @@ hideo54のブログ「いうていけろ」のソースコードです。
 
 * はてなスター設置
 * Google Analytics の設定
-* Dark mode 対応
 * Firebase Hosting へのデプロイと確認
 * 移行 (DNS 切り替え)
 

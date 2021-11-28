@@ -37,8 +37,11 @@ const NoMarkLi = styled.li`
     margin: 1em;
     padding: 1em;
     border-radius: 20px;
-    box-shadow: 0 0 10px #CCCCCC;
     list-style: none;
+    box-shadow: 0 0 10px #CCCCCC;
+    @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0 10px #444444;
+    }
 `;
 
 const App = ({ categoryCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {
