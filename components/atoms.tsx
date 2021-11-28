@@ -66,8 +66,11 @@ export const Tag: React.FC = ({ children }) => (
     </Link>
 );
 
-const ShareButtonSpan = styled.span`
+export const ShareButtonSpan = styled.span`
     margin-right: 8px;
+    height: 20px;
+    display: flex;
+    align-items: center;
 `;
 
 const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => {
@@ -116,6 +119,60 @@ const HatenaBookmarkButton: React.FC<{ path: string; }> = ({ path }) => (
     </ShareButtonSpan>
 );
 
+const colors = [
+    { name: 'blue', color: '#02b0f9' },
+    { name: 'red', color: '#fe5e65' },
+    { name: 'green', color: '#4ce734' },
+    { name: 'normal', color: '#fece68' },
+];
+
+const HatenaStarSpan = styled.span<{ color: typeof colors[number]['color']}>`
+    vertical-align: top;
+    color: ${props => colors.filter(color => color.name === props.color)[0].color};
+    cursor: pointer;
+`;
+
+const HatenaStarButton: React.FC<{ path: string; }> = ({ path }) => {
+    // http://developer.hatena.ne.jp/ja/documents/star/apis/entry
+    interface Star {
+        name: string;
+        quote: string;
+        count?: number;
+        color: string; // 'normal', 'green', 'red', 'blue'
+    }
+    const [stars, setStars] = useState<Star[]>([]);
+    useEffect(() => {
+        (async () => {
+            const response = await fetch(`/api/get-hatena-stars?path=${path}`);
+            const res = await response.json() as {
+                ok: boolean;
+                allStars: Star[];
+            };
+            if (res.ok) setStars(res.allStars);
+        })();
+    }, []);
+    return (
+        <ShareButtonSpan>
+            <img
+                src='https://cdn.blog.st-hatena.com/images/theme/star/hatena-star-add-button.svg'
+                alt='Add Hatena Star'
+                style={{
+                    cursor: 'pointer',
+                    marginRight: '4px',
+                }}
+                onClick={() => {
+                    // window.open('https://blog.hideo54.com' + path, '_blank')?.focus();
+                }}
+            />
+            {stars.map((star, i) =>
+                <HatenaStarSpan key={i} color={star.color}>
+                    ★
+                </HatenaStarSpan>
+            )}
+        </ShareButtonSpan>
+    );
+};
+
 export const Archive: React.FC<{
     title: string;
     date: string | Dayjs;
@@ -136,6 +193,7 @@ export const Archive: React.FC<{
                 url={`https://blog.hideo54.com/archives/${props.filename}`}
             />
             <HatenaBookmarkButton path={`/archives/${props.filename}`} />
+            <HatenaStarButton path={`/archives/${props.filename}`} />
         </div>
     );
     return (
