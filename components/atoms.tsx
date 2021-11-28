@@ -281,6 +281,9 @@ const WrapperDiv = styled.div`
             width: 100%;
             margin-right: 1em;
         }
+        .main {
+            width: 100%;
+        }
     }
 `;
 
