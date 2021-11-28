@@ -161,7 +161,8 @@ const HatenaStarButton: React.FC<{ path: string; }> = ({ path }) => {
                     marginRight: '4px',
                 }}
                 onClick={() => {
-                    // window.open('https://blog.hideo54.com' + path, '_blank')?.focus();
+                    const url = encodeURIComponent('https://blog.hideo54.com' + path);
+                    window.open('https://s.hatena.ne.jp/star.add?uri=' + url, '_blank')?.focus();
                 }}
             />
             {stars.map((star, i) =>
