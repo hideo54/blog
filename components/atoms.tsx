@@ -14,6 +14,7 @@ const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
         border-radius: 20px;
         box-shadow: 0 0 10px #CCCCCC;
         @media (prefers-color-scheme: dark) {
+            background-color: #111111;
             box-shadow: 0 0 10px #444444;
         }
     ` : `
@@ -66,11 +67,26 @@ export const Tag: React.FC = ({ children }) => (
     </Link>
 );
 
-export const ShareButtonSpan = styled.span`
+export const ShareButtonSpan = styled.span<{
+    enableTwitterStyle?: boolean;
+}>`
     margin-right: 8px;
     height: 20px;
     display: flex;
     align-items: center;
+    ${props => props.enableTwitterStyle ? `
+        background-color: #00acee;
+        border-radius: 3px;
+        font-size: 0.7em;
+        font-weight: bold;
+        padding: 0 8px;
+        &:hover {
+            background-color: #0d93e6;
+        }
+        a {
+            text-decoration: none;
+        }
+    `: ''}
 `;
 
 const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => {
@@ -90,8 +106,12 @@ const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) =>
     return twttrSupported ? (
         <ShareButtonSpan ref={containerElement} />
     ) : (
-        <ShareButtonSpan ref={containerElement}>
-            <IconAnchor LeftIcon={Twitter} href={`https://twitter.com/intent/tweet?${qs.stringify({ text, url })}`}>
+        <ShareButtonSpan enableTwitterStyle>
+            <IconAnchor
+                LeftIcon={Twitter}
+                href={`https://twitter.com/intent/tweet?${qs.stringify({ text, url })}`}
+                color='white'
+            >
                 ツイート
             </IconAnchor>
         </ShareButtonSpan>
@@ -174,6 +194,11 @@ const HatenaStarButton: React.FC<{ path: string; }> = ({ path }) => {
     );
 };
 
+const ShareButtonsDiv = styled.div`
+    display: flex;
+    margin: 1em 0;
+`;
+
 export const Archive: React.FC<{
     title: string;
     date: string | Dayjs;
@@ -188,20 +213,20 @@ export const Archive: React.FC<{
     const isExcerpt = props.isExcerpt || false;
     const showFrame = props.showFrame || false;
     const Share = () => (
-        <div style={{ display: 'flex' }}>
+        <ShareButtonsDiv>
             <TweetButton
                 text={`${props.title} | いうていけろ - hideo54のブログ`}
                 url={`https://blog.hideo54.com/archives/${props.filename}`}
             />
             <HatenaBookmarkButton path={`/archives/${props.filename}`} />
             <HatenaStarButton path={`/archives/${props.filename}`} />
-        </div>
+        </ShareButtonsDiv>
     );
     return (
         <ArchiveArticle showFrame={showFrame}>
-            <b>
+            <div style={{ fontWeight: 'bold' }}>
                 <IconNextLink href={'/categories/' + props.category} LeftIcon={Folder}>{props.category}</IconNextLink>
-            </b>
+            </div>
             <h2 className='title'>
                 <Link href={'/archives/' + props.filename}>
                     <a>
@@ -352,6 +377,7 @@ const FrameDiv = styled.div`
     border-radius: 20px;
     box-shadow: 0 0 10px #CCCCCC;
     @media (prefers-color-scheme: dark) {
+        background-color: #111111;
         box-shadow: 0 0 10px #444444;
     }
 `;

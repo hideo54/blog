@@ -40,6 +40,7 @@ const NoMarkLi = styled.li`
     list-style: none;
     box-shadow: 0 0 10px #CCCCCC;
     @media (prefers-color-scheme: dark) {
+        background-color: #111111;
         box-shadow: 0 0 10px #444444;
     }
 `;
