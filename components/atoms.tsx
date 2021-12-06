@@ -306,8 +306,14 @@ const PageLinksDiv = styled.div`
                 border: 2px solid #0091EA;
                 color: #0091EA;
                 cursor: pointer;
+                &:hover {
+                    background-color: #eeeeee;
+                }
             }
         }
+    }
+    a {
+        text-decoration: none;
     }
 `;
 
