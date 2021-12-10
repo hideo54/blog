@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@hideo54/eslint-config": "^1.0.12",
-    "@types/lodash": "^4.14.177",
+    "@types/lodash": "^4.14.178",
     "@types/react": "^17.0.37",
     "axios": "^0.24.0",
     "eslint": "^8.4.1",
