@@ -21,4 +21,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
           channelId: live
-          projectId: hideo54-blog
+          projectId: hideo54-172008
+          target: hideo54-blog
