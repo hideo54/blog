@@ -5,12 +5,16 @@ name: Deploy to Firebase Hosting on merge
 'on':
   push:
     branches:
-      - master # もともとミスなんだけどまあ都合がよくて、リリースするまでこのままにして deploy 発火を防ぐぞい
+      - main
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - run: |
+        cd archives
+        git pull origin main
+        cd ..
       - run: npm ci && npm run build && npm run export
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
