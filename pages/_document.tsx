@@ -63,8 +63,8 @@ export default class MyDocument extends Document {
                     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
                     <script dangerouslySetInnerHTML={{
                         __html: minify(`
-                            if (window.location.hostname === "hideo54-lab.web.app" || window.location.hostname === 'hideo54-lab.firebaseapp.com') {
-                                window.location.href = 'https://lab.hideo54.com';
+                            if (window.location.hostname === "hideo54-blog.web.app" || window.location.hostname === 'hideo54-blog.firebaseapp.com') {
+                                window.location.href = 'https://blog.hideo54.com';
                             }
                             window.dataLayer = window.dataLayer || [];
                             function gtag(){dataLayer.push(arguments);}
