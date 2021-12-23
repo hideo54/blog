@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        cd archives
-        git pull origin main
-        cd ..
+          cd archives
+          git pull origin main
+          cd ..
       - run: npm ci && npm run build && npm run export
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
