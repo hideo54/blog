@@ -1,5 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import * as functions from 'firebase-functions';
+import express from 'express';
 import axios from 'axios';
+
+const app = express();
 
 interface Star {
     name: string;
@@ -14,7 +17,7 @@ const colors = [
     { name: 'normal', color: '#fece68' },
 ] as const;
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+app.get('/api/hatena-stars', async (req, res) => {
     const path = req.query.path;
     if (typeof path === 'string' && path.match(/^\/archives\/[a-z0-9]+$/)) {
         const url = 'https://blog.hideo54.com' + path;
@@ -60,6 +63,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
         res.status(400).json({ ok: false });
     }
-};
+});
 
-export default handler;
+const hatenaStars = functions.region('us-central1') // Firebase Hosting の制約
+    .https.onRequest(app);
+
+export default hatenaStars;
