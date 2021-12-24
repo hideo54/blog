@@ -10,14 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci && npm run build && npm run export
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
-          channelId: live
-          projectId: hideo54-172008
-          target: hideo54-blog
+      - run: npm ci && npm run build
       - uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
