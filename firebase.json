@@ -8,6 +8,12 @@
       "**/node_modules/**"
     ],
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "/api/hatena-stars",
+        "function": "hatena-stars"
+      }
+    ]
   }
 }
