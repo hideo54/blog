@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "develop": "next dev",
-    "build": "next build && tsc --allowSyntheticDefaultImports functions/*.ts",
+    "build": "next build",
     "start": "next start",
     "export": "next export",
     "lint": "eslint .",

@@ -25,6 +25,7 @@
     "**/*.tsx"
   ],
   "exclude": [
+    "functions/src",
     "node_modules"
   ]
 }
