@@ -28,7 +28,7 @@ jobs:
         with:
           name: hatenaStars
           runtime: nodejs16
-          source_dir: functions
+          source_dir: 'functions/dist'
           entry_point: 'index.js'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
