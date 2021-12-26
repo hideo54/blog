@@ -12,7 +12,7 @@
     "rewrites": [
       {
         "source": "/api/hatena-stars",
-        "function": "hatena-stars"
+        "function": "hatenaStars"
       }
     ]
   }
