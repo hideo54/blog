@@ -26,12 +26,12 @@ jobs:
       - uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
-      - uses: 'google-github-actions/deploy-cloud-functions@v0'
-        with:
-          name: hatenaStars
-          runtime: nodejs16
-          source_dir: 'functions/dist'
-          entry_point: 'index.js'
+      # - uses: 'google-github-actions/deploy-cloud-functions@v0'
+      #   with:
+      #     name: hatenaStars
+      #     runtime: nodejs16
+      #     source_dir: 'functions/dist'
+      #     entry_point: 'index.js'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
