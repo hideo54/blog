@@ -21,6 +21,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - run: npm ci && npm run build && npm run export
+      - run: npm ci && npm run build
+        working-directory: ./functions
       - uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
