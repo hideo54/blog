@@ -35,8 +35,8 @@ const Pre = styled.pre`
 `;
 
 const Hr = styled.hr`
+    border: none; // For Chrome and Safari
     border-top: 1px dashed #BBBBBB;
-    border-bottom: none; // For Chrome and Safari
     color: transparent;
 `;
 

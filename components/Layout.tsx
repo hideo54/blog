@@ -51,8 +51,8 @@ const FooterDiv = styled.footer`
 
     hr {
         margin-bottom: 1em;
+        border: none; // For Chrome and Safari
         border-top: 1px solid #BBBBBB;
-        border-bottom: none; // For Chrome and Safari
         color: transparent;
     }
 `;
