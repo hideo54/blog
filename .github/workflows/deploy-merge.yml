@@ -31,7 +31,6 @@ jobs:
           name: hatenaStars
           runtime: nodejs16
           source_dir: functions
-          entry_point: 'dist/index.js'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
