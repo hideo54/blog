@@ -1,73 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { Folder, Calendar, Open, ChevronForward } from '@styled-icons/ionicons-outline';
+import { Folder, Calendar, ChevronForward } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
 import { IconSpan, IconAnchor, IconNextLink } from '@hideo54/reactor';
 import dayjs, { Dayjs } from 'dayjs';
 import qs from 'querystring';
+import Tag from './Tag';
 
-const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
-    ${props => props.showFrame ? `
-        margin: 2em 0;
-        padding: 1em;
-        border-radius: 20px;
-        box-shadow: 0 0 10px #CCCCCC;
-        @media (prefers-color-scheme: dark) {
-            background-color: #111111;
-            box-shadow: 0 0 10px #444444;
-        }
-    ` : `
-        margin: 1em 0;
-    `}
-
-    h2.title {
-        margin-top: 0.5em;
-        font-feature-settings: 'palt'; // Proportional Alternate Widths. cf. https://helpx.adobe.com/jp/fonts/user-guide.html/jp/fonts/using/open-type-syntax.ug.html#palt
-    }
-
-    section {
-        margin: 1em 0;
-    }
+const ShareButtonsDiv = styled.div`
+    display: flex;
+    margin: 1em 0;
 `;
 
-const CautionP = styled.p`
-    color: #DA0808;
-`;
-
-const TagSpan = styled.span`
-    display: inline-block;
-    position: relative;
-    margin: 4px 12px;
-    padding: 4px 8px;
-    border: 2px solid #0091EA;
-    border-left: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #0091EA;
-    &::before {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        width: 1em;
-        height: 1em;
-        transform: translateX(-6px) translateY(3px) rotate(45deg) scale(1.2);
-        border-left: 2px solid #0091EA;
-        border-bottom: 2px solid #0091EA;
-        border-radius: 4px;
-    }
-`;
-
-export const Tag: React.FC = ({ children }) => (
-    <Link href={`/tags/${children}`}>
-        <a>
-            <TagSpan>{children}</TagSpan>
-        </a>
-    </Link>
-);
-
-export const ShareButtonSpan = styled.span<{
+const ShareButtonSpan = styled.span<{
     enableTwitterStyle?: boolean;
 }>`
     margin-right: 8px;
@@ -139,13 +85,6 @@ const HatenaBookmarkButton: React.FC<{ path: string; }> = ({ path }) => (
     </ShareButtonSpan>
 );
 
-const colors = [
-    { name: 'blue', color: '#02b0f9' },
-    { name: 'red', color: '#fe5e65' },
-    { name: 'green', color: '#4ce734' },
-    { name: 'normal', color: '#fece68' },
-];
-
 const HatenaStarSpan = styled.span<{ color: typeof colors[number]['color']}>`
     vertical-align: top;
     color: ${props => colors.filter(color => color.name === props.color)[0].color};
@@ -195,12 +134,40 @@ const HatenaStarButton: React.FC<{ path: string; }> = ({ path }) => {
     );
 };
 
-const ShareButtonsDiv = styled.div`
-    display: flex;
-    margin: 1em 0;
+const CautionP = styled.p`
+    color: #DA0808;
 `;
 
-export const Archive: React.FC<{
+const colors = [
+    { name: 'blue', color: '#02b0f9' },
+    { name: 'red', color: '#fe5e65' },
+    { name: 'green', color: '#4ce734' },
+    { name: 'normal', color: '#fece68' },
+];const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
+${props => props.showFrame ? `
+    margin: 2em 0;
+    padding: 1em;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #CCCCCC;
+    @media (prefers-color-scheme: dark) {
+        background-color: #111111;
+        box-shadow: 0 0 10px #444444;
+    }
+` : `
+    margin: 1em 0;
+`}
+
+h2.title {
+    margin-top: 0.5em;
+    font-feature-settings: 'palt'; // Proportional Alternate Widths. cf. https://helpx.adobe.com/jp/fonts/user-guide.html/jp/fonts/using/open-type-syntax.ug.html#palt
+}
+
+section {
+    margin: 1em 0;
+}
+`;
+
+const Archive: React.FC<{
     title: string;
     date: string | Dayjs;
     update?: string | Dayjs;
@@ -282,190 +249,4 @@ export const Archive: React.FC<{
     );
 };
 
-const PageLinksDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    div {
-        width: 40px;
-        height: 40px;
-        margin: 0.5em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.2em;
-        &.abbr {
-            cursor: default;
-        }
-        &:not(.abbr) {
-            &.current {
-                border: 2px solid #0091EA;
-                color: white;
-                background-color: #0091EA;
-                cursor: default;
-            }
-            &:not(.current) {
-                border: 2px solid #0091EA;
-                color: #0091EA;
-                cursor: pointer;
-                &:hover {
-                    background-color: #eeeeee;
-                }
-            }
-        }
-    }
-    a {
-        text-decoration: none;
-    }
-`;
-
-const PageLink: React.FC<{
-    path: string;
-    abbr?: boolean;
-    current?: boolean;
-}> = ({ children, path, abbr = false, current = false }) => (
-    abbr ? (
-        <div className='abbr'>…</div>
-    ) : (
-        <Link href={children === '1' ? path : `${path}?p=${children}`}>
-            <a>
-                <div className={current ? 'current' : ''}>{children}</div>
-            </a>
-        </Link>
-    )
-);
-
-export const PageLinks: React.FC<{
-    path: string;
-    current: number;
-    max: number;
-}> = ({ path, current, max }) => {
-    return (
-        <PageLinksDiv>
-            <PageLink path={path} current={current === 1}>1</PageLink>
-            {current > 3 && <PageLink path={path} abbr />}
-            {current > 2 && <PageLink path={path}>{current - 1}</PageLink>}
-            {current > 1 && <PageLink path={path} current>{current}</PageLink>}
-            {current < max && <PageLink path={path}>{current + 1}</PageLink>}
-            {current < max - 1 && <PageLink path={path} abbr />}
-        </PageLinksDiv>
-    );
-};
-
-const WrapperDiv = styled.div`
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    @media (min-width: 881px) {
-        aside {
-            width: 30%;
-            margin-right: 1em;
-        }
-        .main {
-            width: 65%;
-            margin-left: 1em;
-        }
-    }
-    @media (max-width: 880px) {
-        aside {
-            width: 100%;
-            margin-right: 1em;
-        }
-        .main {
-            width: 100%;
-        }
-    }
-`;
-
-const FrameDiv = styled.div`
-    margin: 2em 0;
-    padding: 1em;
-    border-radius: 20px;
-    box-shadow: 0 0 10px #CCCCCC;
-    @media (prefers-color-scheme: dark) {
-        background-color: #111111;
-        box-shadow: 0 0 10px #444444;
-    }
-`;
-
-const Ul = styled.ul<{ inlineBlockLi?: boolean }>`
-    padding-left: 0;
-    li {
-        list-style: none;
-        ${props => props.inlineBlockLi && `
-            display: inline-block;
-        `}
-    }
-`;
-
-export const WrapperWithSidebar: React.FC<{
-    data: {
-        categoryCountsSorted: {
-            category: string;
-            categoryCount: number;
-            latest: string;
-        }[];
-        tagCountsSorted: {
-            tag: string;
-            tagCount: number;
-            latest: string;
-        }[];
-    };
-}> = ({ children, data }) => {
-    const introColumn = (
-        <FrameDiv>
-            <h2>hideo54</h2>
-            <p>
-                情報技術や社会が好きな学生です。
-                <br />
-                詳しくは <IconAnchor RightIcon={Open} href='https://hideo54.com'>hideo54.com</IconAnchor> へ。
-            </p>
-            <p>
-                Twitter: <IconAnchor RightIcon={Open} href='https://twitter.com/hideo54'>@hideo54</IconAnchor>
-            </p>
-        </FrameDiv>
-    );
-    const categoriesColumn = (
-        <FrameDiv>
-            <h2>カテゴリ</h2>
-            <Ul>
-                {data.categoryCountsSorted.map(categoryCount => (
-                    <li key={categoryCount.category}>
-                        <IconNextLink LeftIcon={Folder} href={`/categories/${categoryCount.category}`}>
-                            {categoryCount.category} ({categoryCount.categoryCount})
-                        </IconNextLink>
-                        <br />
-                        <span>最新: {categoryCount.latest}</span>
-                    </li>
-                ))}
-            </Ul>
-        </FrameDiv>
-    );
-    const tagsColumn = (
-        <FrameDiv>
-            <h2>タグ</h2>
-            <Ul inlineBlockLi>
-                {data.tagCountsSorted.map(tagCount => (
-                    <li key={tagCount.tag}>
-                        <Tag>
-                            {tagCount.tag}
-                        </Tag>
-                    </li>
-                ))}
-            </Ul>
-        </FrameDiv>
-    );
-    return (
-        <WrapperDiv>
-            <div className='main'>
-                {children}
-            </div>
-            <aside>
-                {introColumn}
-                {categoriesColumn}
-                {tagsColumn}
-            </aside>
-        </WrapperDiv>
-    );
-};
+export default Archive;

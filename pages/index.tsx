@@ -1,7 +1,9 @@
 import type { InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-import { Archive, PageLinks, WrapperWithSidebar } from '../components/atoms';
+import Archive from '../components/Archive';
+import PageLinks from '../components/PageLinks';
+import WrapperWithSidebar from '../components/WrapperWithSidebar';
 import { MDXProvider } from '../components/markdown';
 import { getArchivesData, getCategoryCounts, getTagCounts } from '../lib/blog';
 

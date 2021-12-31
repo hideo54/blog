@@ -2,7 +2,8 @@ import type { InferGetStaticPropsType, GetStaticPaths, GetStaticPropsContext } f
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import { IconNextLink } from '@hideo54/reactor';
 import Layout from '../../components/Layout';
-import { Archive, WrapperWithSidebar } from '../../components/atoms';
+import Archive from '../../components/Archive';
+import WrapperWithSidebar from '../../components/WrapperWithSidebar';
 import { MDXProvider } from '../../components/markdown';
 import { getArchivesData, getBodySource, getCategoryCounts, getTagCounts } from '../../lib/blog';
 

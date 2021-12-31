@@ -5,7 +5,7 @@ import { IconNextLink } from '@hideo54/reactor';
 import { countBy } from 'lodash';
 import dayjs from 'dayjs';
 import Layout from '../../components/Layout';
-import { Tag } from '../../components/atoms';
+import Tag from '../../components/Tag';
 import { getArchivesData } from '../../lib/blog';
 
 export const getStaticProps = async () => {

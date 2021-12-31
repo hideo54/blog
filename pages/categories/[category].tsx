@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { ChevronBack } from '@styled-icons/ionicons-outline';
 import { IconNextLink } from '@hideo54/reactor';
 import Layout from '../../components/Layout';
-import { Archive, PageLinks } from '../../components/atoms';
+import Archive from '../../components/Archive';
+import PageLinks from '../../components/PageLinks';
 import { MDXProvider } from '../../components/markdown';
 import { getArchivesData } from '../../lib/blog';
 
