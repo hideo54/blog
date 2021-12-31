@@ -1,5 +1,7 @@
 import type { InferGetStaticPropsType } from 'next';
 import { useRouter } from 'next/router';
+import { Feed } from 'feed';
+import fs from 'fs/promises';
 import Layout from '../components/Layout';
 import Archive from '../components/Archive';
 import PageLinks from '../components/PageLinks';
@@ -11,6 +13,39 @@ export const getStaticProps = async () => {
     const archivesData = await getArchivesData();
     const categoryCountsSorted = await getCategoryCounts(archivesData);
     const tagCountsSorted = await getTagCounts(archivesData);
+    const feed = new Feed({
+        title: 'いうていけろ',
+        description: 'hideo54のブログ',
+        id: 'https://blog.hideo54.com',
+        language: 'ja',
+        copyright: 'hideo54',
+        image: 'https://img.hideo54.com/icons/main.png',
+        updated: new Date(
+            archivesData.map(
+                archiveData => archiveData.data.date
+            ).sort().reverse()[0]
+        ),
+        generator: 'https://github.com/hideo54/blog',
+        feedLinks: {
+            atom: 'https://blog.hideo54.com/atom.xml',
+        },
+        author: {
+            name: 'hideo54',
+            email: 'contact@hideo54.com',
+            link: 'https://hideo54.com',
+        },
+    });
+    archivesData.forEach(archiveData => {
+        const link = `https://blog.hideo54.com/archives/${archiveData.filename}`;
+        feed.addItem({
+            title: archiveData.data.title,
+            id: link,
+            link,
+            description: archiveData.excerptMarkdown,
+            date: new Date(archiveData.data.date),
+        });
+    });
+    await fs.writeFile('public/atom.xml', feed.atom1());
     return {
         props: {
             archivesData,

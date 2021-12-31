@@ -21,10 +21,13 @@ export const getArchivesData = async () => {
                     date: data.date.toISOString(),
                     update: data.update ? data.update?.toISOString() : null,
                 };
-                const excerptSourcePromise = serialize(file.excerpt!);
-                return Promise.all([serializableData, excerptSourcePromise]);
-            }).then(([data, excerptSource]) => ({
-                data, excerptSource,
+                const excerptMarkdown = file.excerpt || '';
+                const excerptSourcePromise = serialize(excerptMarkdown);
+                return Promise.all([serializableData, excerptMarkdown, excerptSourcePromise]);
+            }).then(([data, excerptMarkdown, excerptSource]) => ({
+                data,
+                excerptMarkdown,
+                excerptSource,
                 filename: filename.split('.')[0],
             }))
         )
