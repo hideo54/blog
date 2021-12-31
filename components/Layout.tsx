@@ -91,7 +91,7 @@ const Layout: React.FC<{
             <meta charSet='utf-8' />
             <meta name='viewport' content='initial-scale=1.0, width=device-width' />
             <meta name='description' content={description} />
-            <meta key='og:site_name' property='og:site_name' content='hideo54 Lab' />
+            <meta key='og:site_name' property='og:site_name' content='いうていけろ - hideo54のブログ' />
             <meta key='og:title' property='og:title' content={title} />
             <meta key='og:description' property='og:description' content={description} />
             {imageUrl &&
