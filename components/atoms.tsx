@@ -162,6 +162,7 @@ const HatenaStarButton: React.FC<{ path: string; }> = ({ path }) => {
     }
     const [stars, setStars] = useState<Star[]>([]);
     useEffect(() => {
+        if (process.env.NODE_ENV === 'development') return;
         (async () => {
             const response = await fetch(`/api/hatena-stars?path=${path}`);
             const res = await response.json() as {
