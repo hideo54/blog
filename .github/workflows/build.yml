@@ -13,6 +13,9 @@ jobs:
       NEXT_TELEMETRY_DISABLED: 1 # https://nextjs.org/telemetry
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: true
+        ssh-key: '${{ secrets.ARCHIVES_DEPLOY_KEY }}'
     - uses: actions/setup-node@v1
       with:
         node-version: '16'

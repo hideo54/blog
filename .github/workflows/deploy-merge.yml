@@ -8,6 +8,8 @@ name: Deploy to Cloud Functions and Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1 # https://nextjs.org/telemetry
     steps:
       - uses: actions/checkout@v2
         with:
