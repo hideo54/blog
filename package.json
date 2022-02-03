@@ -40,7 +40,7 @@
     "@hideo54/eslint-config": "^1.0.13",
     "@types/express": "^4.17.13",
     "@types/lodash": "^4.14.178",
-    "@types/react": "^17.0.38",
+    "@types/react": "^17.0.39",
     "@types/styled-components": "^5.1.21",
     "axios": "^0.25.0",
     "eslint": "^8.8.0",
