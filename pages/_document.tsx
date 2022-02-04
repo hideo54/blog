@@ -63,7 +63,7 @@ export default class MyDocument extends Document {
                     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
                     <script dangerouslySetInnerHTML={{
                         __html: minify(`
-                            if (window.location.hostname === "hideo54-blog.web.app" || window.location.hostname === 'hideo54-blog.firebaseapp.com') {
+                            if (window.location.hostname === "hideo-blog.web.app" || window.location.hostname === 'hideo-blog.firebaseapp.com') {
                                 window.location.href = 'https://blog.hideo54.com';
                             }
                             window.dataLayer = window.dataLayer || [];
