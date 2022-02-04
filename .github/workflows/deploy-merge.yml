@@ -28,7 +28,7 @@ jobs:
         working-directory: ./functions
       - uses: 'google-github-actions/auth@v0'
         with:
-          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54 }}'
       - uses: 'google-github-actions/deploy-cloud-functions@v0'
         with:
           name: hatenaStars
@@ -37,6 +37,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54_172008 }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54 }}'
           channelId: live
-          projectId: hideo54-172008
+          projectId: hideo54
