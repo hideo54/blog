@@ -4,11 +4,17 @@ import styled from 'styled-components';
 import { Open } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
 import { IconAnchor, IconNextLink } from '@hideo54/reactor';
+import Footnote from './Footnote';
 
 const H2 = styled.h2`
     border-left: 4px solid #0091EA;
     margin-top: 1.5em;
     padding-left: 8px;
+    /* &::before {
+        content: '##';
+        color: #0091EA;
+        margin-right: 0.5em;
+    } */
 `;
 
 const Code = styled.code`
@@ -111,6 +117,7 @@ const components = {
     img: (props: React.ComponentPropsWithoutRef<'img'>) => <Img {...props} />,
     // https://mdxjs.com/table-of-components
     Tweet: (props: { url: string; }) => <Tweet {...props} />,
+    Footnote: (props: { description: string; }) => <Footnote {...props} />,
 };
 
 export const MDXProvider: React.FC<{ mdxSource: MDXRemoteSerializeResult; }> = ({ mdxSource }) => (
