@@ -192,9 +192,9 @@ const Archive: React.FC<{
     );
     return (
         <ArchiveArticle showFrame={showFrame}>
-            <div style={{ fontWeight: 'bold' }}>
+            <section style={{ fontWeight: 'bold' }}>
                 <IconNextLink href={'/categories/' + props.category} LeftIcon={Folder}>{props.category}</IconNextLink>
-            </div>
+            </section>
             <h2 className='title'>
                 <Link href={'/archives/' + props.filename}>
                     <a>

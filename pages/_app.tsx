@@ -67,6 +67,10 @@ const GlobalStyle = createGlobalStyle`
         margin: 0.5em 0;
         line-height: 1.6;
     }
+
+    section {
+        margin: 1em 0;
+    }
 `;
 
 const App = ({ Component, pageProps }: AppProps) => {
