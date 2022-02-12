@@ -18,7 +18,10 @@ const H2 = styled.h2`
 `;
 
 const H3 = styled.h3`
-    text-decoration: underline #0091EA 2px;
+    /* text-decoration: underline #0091EA 2px; // Safari does not support this style. FUCK. Instead: */
+    text-decoration: underline;
+    text-decoration-color: #0091EA;
+    text-decoration-thickness: 2px;
 `;
 
 const Code = styled.code`
