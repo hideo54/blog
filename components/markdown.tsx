@@ -17,6 +17,10 @@ const H2 = styled.h2`
     } */
 `;
 
+const H3 = styled.h3`
+    text-decoration: underline #0091EA 2px;
+`;
+
 const Code = styled.code`
     margin: 2px;
     padding: 2px 4px;
@@ -107,6 +111,7 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
 const components = {
     h1: (props: React.ComponentPropsWithoutRef<'h2'>) => <H2 {...props} />, // h1 も h2 にする
     h2: (props: React.ComponentPropsWithoutRef<'h2'>) => <H2 {...props} />,
+    h3: (props: React.ComponentPropsWithoutRef<'h2'>) => <H3 {...props} />,
     blockquote: (props: React.ComponentPropsWithoutRef<'blockquote'>) => <Blockquote {...props} />,
     inlineCode: (props: React.ComponentPropsWithoutRef<'code'>) => <Code {...props} />,
     pre: (props: React.ComponentPropsWithoutRef<'pre'>) => <Pre {...props} />,
@@ -117,7 +122,7 @@ const components = {
     img: (props: React.ComponentPropsWithoutRef<'img'>) => <Img {...props} />,
     // https://mdxjs.com/table-of-components
     Tweet: (props: { url: string; }) => <Tweet {...props} />,
-    Footnote: (props: { description: string; }) => <Footnote {...props} />,
+    Footnote: (props: { short: string; }) => <Footnote {...props} />,
 };
 
 export const MDXProvider: React.FC<{ mdxSource: MDXRemoteSerializeResult; }> = ({ mdxSource }) => (
