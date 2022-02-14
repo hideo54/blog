@@ -7,9 +7,14 @@ import { IconAnchor, IconNextLink } from '@hideo54/reactor';
 import Footnote from './Footnote';
 
 const H2 = styled.h2`
-    /* border-left: 4px solid ${props => props.theme.color.accent};
-    margin-top: 1.5em;
-    padding-left: 8px; */
+    &::before {
+        content: '#';
+        color: ${props => props.theme.color.accent};
+        margin-right: 0.5em;
+    }
+`;
+
+const H3 = styled.h3`
     &::before {
         content: '##';
         color: ${props => props.theme.color.accent};
@@ -17,7 +22,7 @@ const H2 = styled.h2`
     }
 `;
 
-const H3 = styled.h3`
+const H4 = styled.h4`
     /* text-decoration: underline ${props => props.theme.color.accent} 2px; // Safari does not support this style. FUCK. Instead: */
     text-decoration: underline;
     text-decoration-color: ${props => props.theme.color.accent};
@@ -110,9 +115,10 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
 };
 
 const components = {
-    h1: (props: React.ComponentPropsWithoutRef<'h2'>) => <H2 {...props} />, // h1 も h2 にする
+    h1: (props: React.ComponentPropsWithoutRef<'h1'>) => <H2 {...props} />, // h1 も h2 にする
     h2: (props: React.ComponentPropsWithoutRef<'h2'>) => <H2 {...props} />,
-    h3: (props: React.ComponentPropsWithoutRef<'h2'>) => <H3 {...props} />,
+    h3: (props: React.ComponentPropsWithoutRef<'h3'>) => <H3 {...props} />,
+    h4: (props: React.ComponentPropsWithoutRef<'h4'>) => <H4 {...props} />,
     blockquote: (props: React.ComponentPropsWithoutRef<'blockquote'>) => <Blockquote {...props} />,
     inlineCode: (props: React.ComponentPropsWithoutRef<'code'>) => <Code {...props} />,
     pre: (props: React.ComponentPropsWithoutRef<'pre'>) => <Pre {...props} />,
