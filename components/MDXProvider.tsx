@@ -7,20 +7,20 @@ import { IconAnchor, IconNextLink } from '@hideo54/reactor';
 import Footnote from './Footnote';
 
 const H2 = styled.h2`
-    border-left: 4px solid #0091EA;
+    /* border-left: 4px solid ${props => props.theme.color.accent};
     margin-top: 1.5em;
-    padding-left: 8px;
-    /* &::before {
+    padding-left: 8px; */
+    &::before {
         content: '##';
-        color: #0091EA;
+        color: ${props => props.theme.color.accent};
         margin-right: 0.5em;
-    } */
+    }
 `;
 
 const H3 = styled.h3`
-    /* text-decoration: underline #0091EA 2px; // Safari does not support this style. FUCK. Instead: */
+    /* text-decoration: underline ${props => props.theme.color.accent} 2px; // Safari does not support this style. FUCK. Instead: */
     text-decoration: underline;
-    text-decoration-color: #0091EA;
+    text-decoration-color: ${props => props.theme.color.accent};
     text-decoration-thickness: 2px;
 `;
 
@@ -29,22 +29,14 @@ const Code = styled.code`
     padding: 2px 4px;
     line-height: 2em;
     border-radius: 4px;
-    background-color: #eeeeee;
-
-    @media (prefers-color-scheme: dark) {
-        background-color: #222222;
-    }
+    background-color: ${props => props.theme.color.shadow};
 `;
 
 const Pre = styled.pre`
     padding: 8px;
     border-radius: 8px;
     overflow: auto;
-    background-color: #eeeeee;
-
-    @media (prefers-color-scheme: dark) {
-        background-color: #222222;
-    }
+    background-color: ${props => props.theme.color.shadow};
 `;
 
 const Hr = styled.hr`
@@ -60,18 +52,11 @@ const Img = styled.img`
 `;
 
 const Blockquote = styled.blockquote`
-    border-left: 4px solid #CCCCCC;
+    border-left: 4px solid ${props => props.theme.color.text};
     padding-left: 1em;
 
     p {
-        color: #888888;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        border-color: #888888;
-        p {
-            color: #CCCCCC;
-        }
+        color: ${props => props.theme.color.text};
     }
 `;
 
@@ -80,7 +65,7 @@ const Table = styled.table`
     margin: 0 auto;
     text-align: center;
     thead {
-        border-bottom: 2px solid #0091EA;
+        border-bottom: 2px solid ${props => props.theme.color.accent};
     }
     th, td {
         padding: 0.5em;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { Folder, Calendar, ChevronForward } from '@styled-icons/ionicons-outline';
 import { Twitter } from '@styled-icons/fa-brands';
 import { IconSpan, IconAnchor, IconNextLink } from '@hideo54/reactor';
@@ -21,13 +21,13 @@ const ShareButtonSpan = styled.span<{
     display: flex;
     align-items: center;
     ${props => props.enableTwitterStyle ? `
-        background-color: #00acee;
+        background-color: ${props.theme.color.accent};
         border-radius: 3px;
         font-size: 0.7em;
         font-weight: bold;
         padding: 0 8px;
         &:hover {
-            background-color: #0d93e6;
+            background-color: ${props.theme.color.accent};
         }
         a {
             text-decoration: none;
@@ -191,6 +191,7 @@ const Archive: React.FC<{
             <HatenaStarButton path={`/archives/${props.filename}`} />
         </ShareButtonsDiv>
     );
+    const theme = useTheme();
     return (
         <ArchiveArticle showFrame={showFrame}>
             <section style={{ fontWeight: 'bold' }}>
@@ -232,7 +233,10 @@ const Archive: React.FC<{
                 {props.tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
             </section>
             <Share />
-            <hr color='#0091EA' />
+            <hr
+                // @ts-expect-error 型なんとかしろ!
+                color={theme.color.accent}
+            />
             <section>
                 {props.children}
             </section>
@@ -242,7 +246,10 @@ const Archive: React.FC<{
                 </IconNextLink>
             ) : (
                 <>
-                    <hr color='#0091EA' />
+                    <hr
+                        // @ts-expect-error 型なんとかしろ!
+                        color={theme.color.accent}
+                    />
                     <Share />
                 </>
             )}

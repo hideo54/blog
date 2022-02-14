@@ -17,14 +17,14 @@ const PageLinksDiv = styled.div`
         }
         &:not(.abbr) {
             &.current {
-                border: 2px solid #0091EA;
+                border: 2px solid ${props => props.theme.color.accent};
                 color: white;
-                background-color: #0091EA;
+                background-color: ${props => props.theme.color.accent};
                 cursor: default;
             }
             &:not(.current) {
-                border: 2px solid #0091EA;
-                color: #0091EA;
+                border: 2px solid ${props => props.theme.color.accent};
+                color: ${props => props.theme.color.accent};
                 cursor: pointer;
                 &:hover {
                     background-color: #eeeeee;

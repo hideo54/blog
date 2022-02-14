@@ -1,15 +1,36 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import * as gtag from '../lib/gtag';
 
-const GlobalStyle = createGlobalStyle`
+interface Theme {
+    color: {
+        text: string;
+        accent: string;
+        background: string;
+        shadow: string;
+    };
+}
+
+const lightColorTheme: Theme['color'] = {
+    text: '#333333',
+    accent: '#0091ea',
+    background: '#ffffff',
+    shadow: '#eeeeee',
+};
+
+const darkColorTheme: Theme['color'] = {
+    text: '#cccccc',
+    accent: '#0091ea',
+    background: '#000000',
+    shadow: '#131313',
+};
+
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     body {
         -webkit-text-size-adjust: 100%;
-        @media (prefers-color-scheme: dark) {
-            background-color: #000000;
-        }
+        background-color: ${props => props.theme.color.background};
     }
 
     body, select, button {
@@ -35,10 +56,7 @@ const GlobalStyle = createGlobalStyle`
 
     h1, h2, h3, h4, h5, h6, p, div, span {
         :not(a &) {
-            color: #333333;
-            @media (prefers-color-scheme: dark) {
-                color: #EEEEEE;
-            }
+            color: ${props => props.theme.color.text};
         }
     }
 
@@ -55,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     a {
-        color: #0091ea;
+        color: ${props => props.theme.color.accent};
         text-decoration: none;
         overflow-wrap: anywhere;
         &:hover {
@@ -85,11 +103,30 @@ const App = ({ Component, pageProps }: AppProps) => {
         };
     }, [router.events]);
     // https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_app.js
+    const [colorName, setColorName] = useState<'light' | 'dark'>('light');
+    useEffect(() => {
+        if (matchMedia('(prefers-color-scheme: dark)').matches) {
+            setColorName('dark');
+        } else {
+            setColorName('light');
+        }
+    }, []);
+    if (process.browser) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (matchMedia('(prefers-color-scheme: dark)').matches) {
+                setColorName('dark');
+            } else {
+                setColorName('light');
+            }
+        });
+    }
     return (
-        <>
+        <ThemeProvider theme={{
+            color: colorName === 'light' ? lightColorTheme : darkColorTheme,
+        }}>
             <Component {...pageProps} />
             <GlobalStyle />
-        </>
+        </ThemeProvider>
     );
 };
 
