@@ -75,6 +75,18 @@ const Blockquote = styled.blockquote`
     }
 `;
 
+const Table = styled.table`
+    border-collapse: collapse;
+    margin: 0 auto;
+    text-align: center;
+    thead {
+        border-bottom: 2px solid #0091EA;
+    }
+    th, td {
+        padding: 0.5em;
+    }
+`;
+
 const TweetDiv = styled.div`
     div.twitter-tweet-rendered {
         margin: 1em auto;
@@ -123,6 +135,7 @@ const components = {
         ? <IconNextLink {...props}/>
         : <IconAnchor RightIcon={Open} {...props} />,
     img: (props: React.ComponentPropsWithoutRef<'img'>) => <Img {...props} />,
+    table: (props: React.ComponentPropsWithoutRef<'table'>) => <Table {...props} />,
     // https://mdxjs.com/table-of-components
     Tweet: (props: { url: string; }) => <Tweet {...props} />,
     Footnote: (props: { short: string; }) => <Footnote {...props} />,
