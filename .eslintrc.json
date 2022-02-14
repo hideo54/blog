@@ -1,3 +1,4 @@
 {
-    "extends": "@hideo54"
+    "extends": "@hideo54",
+    "ignorePatterns": ["functions/dist/**/*.js", "out/**/*.js"]
 }

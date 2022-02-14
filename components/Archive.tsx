@@ -111,7 +111,7 @@ const HatenaStarButton: React.FC<{ path: string; }> = ({ path }) => {
             };
             if (res.ok) setStars(res.allStars);
         })();
-    }, []);
+    }, [path]);
     return (
         <ShareButtonSpan>
             <img
