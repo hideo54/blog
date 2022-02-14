@@ -6,7 +6,7 @@ import Layout from '../components/Layout';
 import Archive from '../components/Archive';
 import PageLinks from '../components/PageLinks';
 import WrapperWithSidebar from '../components/WrapperWithSidebar';
-import { MDXProvider } from '../components/markdown';
+import MDXProvider from '../components/MDXProvider';
 import { getArchivesData, getCategoryCounts, getTagCounts } from '../lib/blog';
 
 export const getStaticProps = async () => {

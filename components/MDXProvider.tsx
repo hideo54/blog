@@ -141,6 +141,8 @@ const components = {
     Footnote: (props: { short: string; }) => <Footnote {...props} />,
 };
 
-export const MDXProvider: React.FC<{ mdxSource: MDXRemoteSerializeResult; }> = ({ mdxSource }) => (
+const MDXProvider: React.FC<{ mdxSource: MDXRemoteSerializeResult; }> = ({ mdxSource }) => (
     <MDXRemote {...mdxSource} components={components} />
 );
+
+export default MDXProvider;

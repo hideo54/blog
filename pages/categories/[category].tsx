@@ -5,7 +5,7 @@ import { IconNextLink } from '@hideo54/reactor';
 import Layout from '../../components/Layout';
 import Archive from '../../components/Archive';
 import PageLinks from '../../components/PageLinks';
-import { MDXProvider } from '../../components/markdown';
+import MDXProvider from '../../components/MDXProvider';
 import { getArchivesData } from '../../lib/blog';
 
 export const getStaticPaths: GetStaticPaths = async () => {
