@@ -102,6 +102,7 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
     useEffect(() => {
         // @ts-expect-error twttr
         if (!twttr.widgets) return;
+        if (!containerElement.current) return;
         setTwttrSupported(true);
         // @ts-expect-error twttr
         twttr.widgets.createTweet(tweetId, containerElement.current, {
@@ -109,7 +110,7 @@ const Tweet: React.FC<{ url: string; }> = ({ url }) => {
             lang: 'ja',
         });
         // https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/guides/embedded-tweet-javascript-factory-function
-    }, [tweetId, dark]);
+    }, [containerElement, tweetId, dark]);
     return (
         <TweetDiv ref={containerElement}>
             {twttrSupported || (

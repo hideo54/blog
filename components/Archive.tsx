@@ -39,6 +39,7 @@ const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) =>
     const [twttrSupported, setTwttrSupported] = useState(false);
     const containerElement = useRef<HTMLSpanElement>(null);
     useEffect(() => {
+        if (!containerElement.current) return;
         // @ts-expect-error twttr
         if (!twttr.widgets) return;
         setTwttrSupported(true);
@@ -48,7 +49,7 @@ const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) =>
             lang: 'ja',
         });
         // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/javascript-factory-function
-    }, [text, url]);
+    }, [containerElement, text, url]);
     return twttrSupported ? (
         <ShareButtonSpan ref={containerElement} />
     ) : (
