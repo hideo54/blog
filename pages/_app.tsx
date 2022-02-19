@@ -9,6 +9,7 @@ interface Theme {
         text: string;
         accent: string;
         background: string;
+        boxBackground: string;
         shadow: string;
     };
 }
@@ -17,14 +18,16 @@ const lightColorTheme: Theme['color'] = {
     text: '#333333',
     accent: '#0091ea',
     background: '#ffffff',
-    shadow: '#eeeeee',
+    boxBackground: '#ffffff',
+    shadow: '#cccccc',
 };
 
 const darkColorTheme: Theme['color'] = {
     text: '#cccccc',
     accent: '#0091ea',
     background: '#000000',
-    shadow: '#131313',
+    boxBackground: '#131313',
+    shadow: '#444444',
 };
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`

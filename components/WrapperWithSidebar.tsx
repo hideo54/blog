@@ -33,12 +33,9 @@ const WrapperDiv = styled.div`
 const FrameDiv = styled.div`
     margin: 2em 0;
     padding: 1em;
+    background-color: ${props => props.theme.color.boxBackground};
     border-radius: 20px;
-    box-shadow: 0 0 10px #CCCCCC;
-    @media (prefers-color-scheme: dark) {
-        background-color: #111111;
-        box-shadow: 0 0 10px #444444;
-    }
+    box-shadow: 0 0 10px ${props => props.theme.color.shadow};
 `;
 
 const Ul = styled.ul<{ inlineBlockLi?: boolean }>`

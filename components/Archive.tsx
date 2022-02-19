@@ -144,16 +144,15 @@ const colors = [
     { name: 'red', color: '#fe5e65' },
     { name: 'green', color: '#4ce734' },
     { name: 'normal', color: '#fece68' },
-];const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
+];
+
+const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
 ${props => props.showFrame ? `
     margin: 2em 0;
     padding: 1em;
+    background-color: ${props.theme.color.boxBackground};
     border-radius: 20px;
-    box-shadow: 0 0 10px #CCCCCC;
-    @media (prefers-color-scheme: dark) {
-        background-color: #111111;
-        box-shadow: 0 0 10px #444444;
-    }
+    box-shadow: 0 0 10px ${props.theme.color.shadow};
 ` : `
     margin: 1em 0;
 `}

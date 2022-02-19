@@ -38,11 +38,8 @@ const NoMarkLi = styled.li`
     padding: 1em;
     border-radius: 20px;
     list-style: none;
-    box-shadow: 0 0 10px #CCCCCC;
-    @media (prefers-color-scheme: dark) {
-        background-color: #111111;
-        box-shadow: 0 0 10px #444444;
-    }
+    background-color: ${props => props.theme.color.boxBackground};
+    box-shadow: 0 0 10px ${props => props.theme.color.shadow};
 `;
 
 const App = ({ categoryCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {

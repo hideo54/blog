@@ -11,10 +11,7 @@ const LogoTypeDiv = styled.div`
         margin-bottom: 0;
         font-size: 3em;
         font-weight: 700;
-        text-shadow: 0 0 5px #CCCCCC;
-        @media (prefers-color-scheme: dark) {
-            text-shadow: 0 0 5px #666666;
-        }
+        text-shadow: 0 0 5px ${props => props.theme.color.shadow};
     }
 
     p {
