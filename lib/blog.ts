@@ -1,5 +1,6 @@
 import { serialize } from 'next-mdx-remote/serialize';
 import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import remarkGfm from 'remark-gfm';
 import dayjs from 'dayjs';
 import { countBy } from 'lodash';
 import fs from 'fs/promises';
@@ -81,6 +82,13 @@ export const getBodySource = async (id: string) => {
     const archivePath = `./archives/${id}.mdx`;
     const fileText = await fs.readFile(archivePath, 'utf-8');
     const file = matter(fileText);
-    const bodySource = await serialize(file.content);
+    const bodySource = await serialize(file.content, {
+        mdxOptions: {
+            remarkPlugins: [
+                remarkGfm,
+            ],
+        },
+        parseFrontmatter: true,
+    });
     return bodySource;
 };
