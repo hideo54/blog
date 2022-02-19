@@ -29,7 +29,7 @@ const H4 = styled.h4`
     text-decoration-thickness: 2px;
 `;
 
-const Code = styled.code`
+const InlineCode = styled.code`
     margin: 2px;
     padding: 2px 4px;
     line-height: 2em;
@@ -41,7 +41,7 @@ const Pre = styled.pre`
     padding: 8px;
     border-radius: 8px;
     overflow: auto;
-    background-color: ${props => props.theme.color.shadow};
+    background-color: ${props => props.theme.color.boxBackground};
 `;
 
 const Hr = styled.hr`
@@ -120,7 +120,10 @@ const components = {
     h3: (props: React.ComponentPropsWithoutRef<'h3'>) => <H3 {...props} />,
     h4: (props: React.ComponentPropsWithoutRef<'h4'>) => <H4 {...props} />,
     blockquote: (props: React.ComponentPropsWithoutRef<'blockquote'>) => <Blockquote {...props} />,
-    inlineCode: (props: React.ComponentPropsWithoutRef<'code'>) => <Code {...props} />,
+    code: (props: React.ComponentPropsWithoutRef<'code'>) =>
+        props.children?.toString().includes('\n')
+            ? <Pre {...props} />
+            : <InlineCode {...props} />,
     pre: (props: React.ComponentPropsWithoutRef<'pre'>) => <Pre {...props} />,
     hr: () => <Hr />,
     a: (props: React.ComponentPropsWithoutRef<'a'>) =>
