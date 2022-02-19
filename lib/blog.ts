@@ -13,7 +13,7 @@ export const getArchivesData = async () => {
             fs.readFile(archivesDir + filename, 'utf-8').then(d => {
                 const file = matter(d, {
                     excerpt: true,
-                    excerpt_separator: '<!-- more -->',
+                    excerpt_separator: '{/* more */}',
                 });
                 const data = file.data as ArchiveData;
                 const serializableData: SerializableArchiveData = {
