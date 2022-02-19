@@ -123,9 +123,10 @@ const components = {
     inlineCode: (props: React.ComponentPropsWithoutRef<'code'>) => <Code {...props} />,
     pre: (props: React.ComponentPropsWithoutRef<'pre'>) => <Pre {...props} />,
     hr: () => <Hr />,
-    a: (props: { href: string; }) => props.href.startsWith('/')
-        ? <IconNextLink {...props}/>
-        : <IconAnchor RightIcon={Open} {...props} />,
+    a: (props: React.ComponentPropsWithoutRef<'a'>) =>
+        (props.href && props.href.startsWith('/'))
+            ? <IconNextLink {...{ ...props, href: props.href } }/>
+            : <IconAnchor RightIcon={Open} {...props} />,
     img: (props: React.ComponentPropsWithoutRef<'img'>) => <Img {...props} />,
     table: (props: React.ComponentPropsWithoutRef<'table'>) => <Table {...props} />,
     // https://mdxjs.com/table-of-components
