@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -38,6 +39,7 @@ const PageLinksDiv = styled.div`
 `;
 
 const PageLink: React.FC<{
+    children?: ReactNode;
     path: string;
     abbr?: boolean;
     current?: boolean;

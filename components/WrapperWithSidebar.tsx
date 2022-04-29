@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Folder, Open } from '@styled-icons/ionicons-outline';
 import { IconAnchor, IconNextLink } from '@hideo54/reactor';
@@ -49,6 +50,7 @@ const Ul = styled.ul<{ inlineBlockLi?: boolean }>`
 `;
 
 const WrapperWithSidebar: React.FC<{
+    children?: ReactNode;
     data: {
         categoryCountsSorted: {
             category: string;

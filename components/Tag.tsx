@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -25,7 +26,9 @@ const TagSpan = styled.span`
     }
 `;
 
-const Tag: React.FC = ({ children }) => (
+const Tag: React.FC<{
+    children: ReactNode;
+}> = ({ children }) => (
     <Link href={`/tags/${children}`}>
         <a>
             <TagSpan>{children}</TagSpan>

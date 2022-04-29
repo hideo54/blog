@@ -1,8 +1,9 @@
-import { IconAnchor } from '@hideo54/reactor';
+import type { ReactNode } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Github } from '@styled-icons/fa-brands';
+import { IconAnchor } from '@hideo54/reactor';
 
 const LogoTypeDiv = styled.div`
     text-align: center;
@@ -68,6 +69,7 @@ const NormalFooter = (
 );
 
 const Layout: React.FC<{
+    children: ReactNode;
     title?: string;
     description?: string;
     imageUrl?: string;

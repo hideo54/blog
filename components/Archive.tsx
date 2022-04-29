@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import { Folder, Calendar, ChevronForward } from '@styled-icons/ionicons-outline';
@@ -176,6 +176,7 @@ const Archive: React.FC<{
     tags: string[];
     isExcerpt?: boolean;
     showFrame?: boolean;
+    children?: ReactNode;
 }> = props => {
     const update = props.update || props.date;
     const isExcerpt = props.isExcerpt || false;
