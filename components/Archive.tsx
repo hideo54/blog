@@ -32,7 +32,7 @@ const ShareButtonSpan = styled.span<{
         a {
             text-decoration: none;
         }
-    `: ''}
+    ` : ''}
 `;
 
 const TweetButton: React.FC<{ text: string; url: string; }> = ({ text, url }) => {
