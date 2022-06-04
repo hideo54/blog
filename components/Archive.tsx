@@ -147,24 +147,24 @@ const colors = [
 ];
 
 const ArchiveArticle = styled.article<{ showFrame: boolean; }>`
-${props => props.showFrame ? `
-    margin: 2em 0;
-    padding: 1em;
-    background-color: ${props.theme.color.boxBackground};
-    border-radius: 20px;
-    box-shadow: 0 0 10px ${props.theme.color.shadow};
-` : `
-    margin: 1em 0;
-`}
+    ${props => props.showFrame ? `
+        margin: 2em 0;
+        padding: 1em;
+        background-color: ${props.theme.color.boxBackground};
+        border-radius: 20px;
+        box-shadow: 0 0 10px ${props.theme.color.shadow};
+    ` : `
+        margin: 1em 0;
+    `}
 
-h2.title {
-    margin-top: 0.5em;
-    font-feature-settings: 'palt'; // Proportional Alternate Widths. cf. https://helpx.adobe.com/jp/fonts/user-guide.html/jp/fonts/using/open-type-syntax.ug.html#palt
-}
+    h2.title {
+        margin-top: 0.5em;
+        font-feature-settings: 'palt'; // Proportional Alternate Widths. cf. https://helpx.adobe.com/jp/fonts/user-guide.html/jp/fonts/using/open-type-syntax.ug.html#palt
+    }
 
-section {
-    margin: 1em 0;
-}
+    section {
+        margin: 1em 0;
+    }
 `;
 
 const Archive: React.FC<{
