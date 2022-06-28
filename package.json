@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/hideo54/blog#readme",
   "dependencies": {
-    "@hideo54/reactor": "^1.4.15",
+    "@hideo54/reactor": "^1.5.0",
     "@styled-icons/fa-brands": "^10.38.0",
     "@styled-icons/ionicons-outline": "^10.34.0",
     "@styled-icons/styled-icon": "^10.6.3",
