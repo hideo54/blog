@@ -36,7 +36,7 @@
     "react-dom": "^18.2.0",
     "reactjs-popup": "^2.0.5",
     "remark-gfm": "^3.0.1",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@hideo54/eslint-config": "^1.0.16",
