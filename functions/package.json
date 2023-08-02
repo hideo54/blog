@@ -12,6 +12,7 @@
     "node": "16"
   },
   "dependencies": {
+    "@types/node": "^16.18.39",
     "axios": "^1.0.0",
     "express": "^4.17.2",
     "firebase-admin": "^11.0.0",
