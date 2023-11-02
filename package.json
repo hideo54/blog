@@ -27,7 +27,7 @@
     "@styled-icons/ionicons-outline": "^10.46.0",
     "@styled-icons/styled-icon": "^10.6.3",
     "@types/node": "^20.5.8",
-    "dayjs": "^1.11.9",
+    "dayjs": "^1.11.10",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
