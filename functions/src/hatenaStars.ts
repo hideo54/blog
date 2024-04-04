@@ -1,4 +1,5 @@
-import * as functions from 'firebase-functions';
+import { setGlobalOptions } from 'firebase-functions/v2';
+import { onRequest } from 'firebase-functions/v2/https';
 import express from 'express';
 import axios from 'axios';
 
@@ -65,7 +66,10 @@ app.get('/api/hatena-stars', async (req, res) => {
     }
 });
 
-const hatenaStars = functions.region('us-central1') // Firebase Hosting の制約
-    .https.onRequest(app);
+setGlobalOptions({
+    region: 'asia-northeast1',
+});
+
+const hatenaStars = onRequest(app);
 
 export default hatenaStars;
