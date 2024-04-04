@@ -12,7 +12,10 @@
     "rewrites": [
       {
         "source": "/api/hatena-stars",
-        "function": "hatenaStars"
+        "function": {
+          "functionId": "hatenaStars",
+          "region": "asia-northeast1"
+        }
       }
     ]
   }
