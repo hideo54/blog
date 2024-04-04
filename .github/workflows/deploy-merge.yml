@@ -29,10 +29,11 @@ jobs:
       - uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_HIDEO54 }}'
-      - uses: 'google-github-actions/deploy-cloud-functions@v0'
+      - uses: 'google-github-actions/deploy-cloud-functions@v2'
         with:
           name: hatenaStars
-          runtime: nodejs16
+          runtime: nodejs20
+          region: asia-northeast1
           source_dir: functions
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
