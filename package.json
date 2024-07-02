@@ -48,6 +48,6 @@
     "axios": "^1.6.8",
     "eslint": "^9.4.0",
     "express": "^4.19.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.5.3"
   }
 }
