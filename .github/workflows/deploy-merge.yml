@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: true
           ssh-key: '${{ secrets.ARCHIVES_DEPLOY_KEY }}'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         # https://nextjs.org/docs/messages/no-cache#github-actions
         with:
           path: ${{ github.workspace }}/.next/cache
