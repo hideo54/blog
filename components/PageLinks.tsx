@@ -48,9 +48,7 @@ const PageLink: React.FC<{
         <div className='abbr'>…</div>
     ) : (
         <Link href={children === '1' ? path : `${path}?p=${children}`}>
-            <a>
-                <div className={current ? 'current' : ''}>{children}</div>
-            </a>
+            <div className={current ? 'current' : ''}>{children}</div>
         </Link>
     )
 );

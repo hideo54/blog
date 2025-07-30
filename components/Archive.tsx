@@ -199,9 +199,7 @@ const Archive: React.FC<{
             </section>
             <h2 className='title'>
                 <Link href={'/archives/' + props.filename}>
-                    <a>
-                        {props.title}
-                    </a>
+                    {props.title}
                 </Link>
             </h2>
             <section>

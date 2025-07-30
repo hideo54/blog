@@ -30,9 +30,7 @@ const NormalHeader = (
     <LogoTypeDiv>
         <h1>
             <Link href='/'>
-                <a>
-                    いうていけろ
-                </a>
+                いうていけろ
             </Link>
         </h1>
         <p>hideo54のブログ</p>

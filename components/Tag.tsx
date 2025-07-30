@@ -30,9 +30,7 @@ const Tag: React.FC<{
     children: ReactNode;
 }> = ({ children }) => (
     <Link href={`/tags/${children}`}>
-        <a>
-            <TagSpan>{children}</TagSpan>
-        </a>
+        <TagSpan>{children}</TagSpan>
     </Link>
 );
 
