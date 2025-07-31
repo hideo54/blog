@@ -39,7 +39,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
 const App = ({ archiveData, bodySource, categoryCountsSorted, tagCountsSorted }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <Layout title={`${archiveData.data.title} | いうていけろ - hideo54のブログ`}>
+        <Layout
+            title={`${archiveData.data.title} | いうていけろ - hideo54のブログ`}
+            imageUrl={archiveData.data.ogp}
+            twitterCardType={archiveData.data.ogp ? 'summary' : 'summary_large_image'}
+        >
             <WrapperWithSidebar data={{ categoryCountsSorted, tagCountsSorted }}>
                 <IconNextLink LeftIcon={ChevronBack} href='/'>トップページ</IconNextLink>
                 <Archive

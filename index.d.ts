@@ -4,6 +4,7 @@ interface ArchiveData {
     update?: Date;
     category: string;
     tags: string[];
+    ogp?: string;
 }
 
 interface SerializableArchiveData extends Omit<ArchiveData, 'date' | 'update'> {
