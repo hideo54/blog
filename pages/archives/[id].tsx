@@ -42,7 +42,7 @@ const App = ({ archiveData, bodySource, categoryCountsSorted, tagCountsSorted }:
         <Layout
             title={`${archiveData.data.title} | いうていけろ - hideo54のブログ`}
             imageUrl={archiveData.data.ogp}
-            twitterCardType={archiveData.data.ogp ? 'summary' : 'summary_large_image'}
+            twitterCardType={archiveData.data.ogp ? 'summary_large_image' : 'summary'}
         >
             <WrapperWithSidebar data={{ categoryCountsSorted, tagCountsSorted }}>
                 <IconNextLink LeftIcon={ChevronBack} href='/'>トップページ</IconNextLink>
